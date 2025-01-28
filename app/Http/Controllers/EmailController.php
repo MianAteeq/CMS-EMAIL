@@ -13,7 +13,7 @@ class EmailController extends Controller
     {
         // $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
 
-      return  DB::table('jobs')->count();
+      return  DB::table('jobs')->get();
     }
     public function sendEmail(Request $request)
     {
