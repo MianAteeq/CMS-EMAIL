@@ -74,7 +74,7 @@ use Modules\Vender\Http\Controllers\ServiceProviderController;
 */
 
 
-Route::post('/test/jobs', [EmailController::class, 'getEmail']);
+Route::get('/test/jobs', [EmailController::class, 'getEmail']);
 
 
 Route::get('/greeting', function () {
