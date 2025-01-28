@@ -59,6 +59,7 @@ use Modules\Vender\Entities\TradingUnitVehicleSpecialist;
 use Modules\Vender\Entities\TradingUnitAccreditationScheme;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\EmailController;
 use Modules\Vender\Http\Controllers\ServiceProviderController;
 
 /*
@@ -73,7 +74,7 @@ use Modules\Vender\Http\Controllers\ServiceProviderController;
 */
 
 
-Route::post('/hours/generate', [ServiceProviderController::class, 'generateTime'])->name('generate.time');
+Route::post('/test/jobs', [EmailController::class, 'getEmail']);
 
 
 Route::get('/greeting', function () {
