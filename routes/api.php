@@ -19,5 +19,6 @@ use App\Http\Controllers\EmailController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/send/email', [EmailController::class,'sendEmail'])->middleware('cors');
+Route::group(['middleware' => ['cors']], function () {
+Route::get('/send', [EmailController::class,'sendEmail']);
+});
