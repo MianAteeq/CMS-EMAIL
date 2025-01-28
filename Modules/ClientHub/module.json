@@ -1,0 +1,13 @@
+{
+    "name": "ClientHub",
+    "alias": "clienthub",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ClientHub\\Providers\\ClientHubServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

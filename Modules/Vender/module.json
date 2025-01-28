@@ -1,0 +1,13 @@
+{
+    "name": "Vender",
+    "alias": "vender",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Vender\\Providers\\VenderServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
