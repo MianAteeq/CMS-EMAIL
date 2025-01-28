@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['middleware' => ['cors']], function () {
-Route::get('/send', [EmailController::class,'sendEmail']);
+Route::post('/send', [EmailController::class,'sendEmail']);
 });
