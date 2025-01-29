@@ -17,13 +17,15 @@ class EmailController extends Controller
     }
     public function sendEmail(Request $request)
     {
-        // $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
+        $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
 
-        $emails=json_decode($request['emails']);
+        // $emails=json_decode($request['emails']);
         foreach($emails as $email){
             $details = [
-            'email' => 'ateeqadrees83@gmail.com',
+            'email' => $email,
             'title' => $request['subject'],
+            'company' => $request['company'],
+            'company_email' => 'developer@iadsr.edu.pk',
             'message' => $request['message'],
         ];
 
