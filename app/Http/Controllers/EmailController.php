@@ -11,7 +11,16 @@ class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        // $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
+        $details = [
+            'email' => 'ateeqadrees83@gmail.com',
+            'title' => 'Subject',
+            'message' => 'Message',
+            'company_email' => env('MAIL_FROM_ADDRESS'),
+            'company' => 'Fission Monster',
+        ];
+        Mail::send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
+            $m->to($details['email'])->subject($details['title']);
+        });
 
       return  DB::table('jobs')->count();
     }
