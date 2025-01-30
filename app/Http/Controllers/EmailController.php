@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
+use App\Jobs\SendEmailJobFM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -38,7 +39,14 @@ class EmailController extends Controller
             'company' => $request['company']??env('MAIL_FROM_NAME'),
         ];
 
-        SendEmailJob::dispatch($details);
+        if($request['company_email']==="Fission Monster"){
+
+            SendEmailJobFM::dispatch($details);
+        }else{
+
+            SendEmailJob::dispatch($details);
+        }
+
 
         // Mail::send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
         //     $m->to($details['email'])->subject($details['title']);
