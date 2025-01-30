@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
-use App\Jobs\SendEmailJobFM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -12,41 +11,23 @@ class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        // $details = [
-        //     'email' => 'ateeqadrees83@gmail.com',
-        //     'title' => 'Subject',
-        //     'message' => 'Message',
-        //     'company_email' => env('MAIL_FROM_ADDRESS'),
-        //     'company' => 'Fission Monster',
-        // ];
-        // Mail::send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
-        //     $m->to($details['email'])->subject($details['title']);
-        // });
+        // $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
 
-      return  DB::table('jobs')->count();
+      return  DB::table('jobs')->get();
     }
     public function sendEmail(Request $request)
     {
-        $emails=['fissionmonsterdev@gmail.com'];
+        // $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
 
-        // $emails=json_decode($request['emails']);
+        $emails=json_decode($request['emails']);
         foreach($emails as $email){
             $details = [
-            'email' => $email,
+            'email' => 'ateeqadrees83@gmail.com',
             'title' => $request['subject'],
             'message' => $request['message'],
-            'company_email' => $request['company_email']??env('MAIL_FROM_ADDRESS'),
-            'company' => $request['company']??env('MAIL_FROM_NAME'),
         ];
 
-        if($request['company_email']==="Fission Monster"){
-
-            SendEmailJobFM::dispatch($details);
-        }else{
-
-            SendEmailJob::dispatch($details);
-        }
-
+        SendEmailJob::dispatch($details);
 
         // Mail::send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
         //     $m->to($details['email'])->subject($details['title']);

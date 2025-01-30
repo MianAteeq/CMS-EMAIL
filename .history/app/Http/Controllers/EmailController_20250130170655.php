@@ -27,7 +27,7 @@ class EmailController extends Controller
     }
     public function sendEmail(Request $request)
     {
-        $emails=['fissionmonsterdev@gmail.com'];
+        $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
 
         // $emails=json_decode($request['emails']);
         foreach($emails as $email){
