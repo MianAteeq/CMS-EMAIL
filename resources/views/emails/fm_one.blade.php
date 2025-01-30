@@ -255,7 +255,7 @@
                                             <table id="u_content_text_1" style="font-family:arial,helvetica,sans-serif;"
                                                 role="presentation" cellpadding="0" cellspacing="0" width="100%"
                                                 border="0">
-                                                <div style="padding: 4%"> {!! $data['body'] !!}</div>
+                                                <div style="padding: 4%"> {!! $details['message'] !!}</div>
                                             </table>
 
 
