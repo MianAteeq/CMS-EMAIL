@@ -20,6 +20,13 @@ class SendEmailTest extends Mailable
 
     public function build()
     {
-        return $this->from($this->details['company_email'], $this->details['company'])->subject($this->details['title'])->view('emails.test_email')->with('details', $this->details);
+        if($this->details['company']=="Fission Monster"){
+
+            return $this->from($this->details['company_email'], $this->details['company'])->subject($this->details['title'])->view('emails.fm_one')->with('details', $this->details);
+
+        }else{
+
+            return $this->from($this->details['company_email'], $this->details['company'])->subject($this->details['title'])->view('emails.test_email')->with('details', $this->details);
+        }
     }
 }
