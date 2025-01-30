@@ -17,16 +17,16 @@ class EmailController extends Controller
     }
     public function sendEmail(Request $request)
     {
-        $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
+        // $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
 
-        // $emails=json_decode($request['emails']);
+        $emails=json_decode($request['emails']);
         foreach($emails as $email){
             $details = [
             'email' => $email,
             'title' => $request['subject'],
-            'company' => $request['company'],
-            'company_email' => 'developer@iadsr.edu.pk',
             'message' => $request['message'],
+            'company_email' => $request['company_email']??env('MAIL_FROM_ADDRESS'),
+            'company' => $request['company']??env('MAIL_FROM_NAME'),
         ];
 
         SendEmailJob::dispatch($details);
@@ -42,5 +42,75 @@ class EmailController extends Controller
             'message' => 'Email sent successfully!',
             'status' => true
         ]);
+    }
+
+    public function getEmailTwo(Request $request)
+    {
+        // $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
+
+        $apiToken = 'tYOfb3CBUeXaWZMzFsGxgQxOnUFhHGLfDs8NvjO20c264c7d';
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST', 'https://waapi.app/api/v1/instances/40890/client/action/send-message', [
+            'body' => '{"chatId":"923004330812@c.us","message":"Hello @1234567890, how are you?"}',
+            'headers' => [
+                'accept' => 'application/json',
+                'authorization' => 'Bearer tYOfb3CBUeXaWZMzFsGxgQxOnUFhHGLfDs8NvjO20c264c7d',
+                'content-type' => 'application/json',
+            ],
+        ]);
+
+        return json_decode($response->getBody());
+
+        // $client = new \GuzzleHttp\Client();
+        // $response = $client->request('GET', 'https://waapi.app/api/v1/instances', [
+        //     'headers' => [
+        //         'Authorization' => 'Bearer ' . $apiToken,
+        //         'Accept' => 'application/json',
+        //         'Content-Type' => 'application/json',
+        //     ]
+        // ]);
+
+        // $responseBody = json_decode($response->getBody(), true);
+        // $instances = $responseBody['instances']; //array of all instances of the authenticated user
+
+        // foreach ($instances as $instance) {
+        //   return  $id = $instance['id'];
+        //     $ownerEmail = $instance['owner'];
+        //     $webhookUrl = $instance['webhook_url']; //this webhook url will receive the subscribed events
+        //     $webhookEvents = $instance['webhook_events']; //array of subscribed events
+        // }
+
+        // 40890
+        //     $client = new \GuzzleHttp\Client();
+
+        // $response = $client->request('POST', 'https://waapi.app/api/v1/instances/id/client/action/send-message', [
+        //     'body' => '{"chatId":"923010451752@c.us","message":"Hello"}',
+        //         'headers' => [
+        //             'accept' => 'application/json',
+        //             'authorization' => 'Bearer tYOfb3CBUeXaWZMzFsGxgQxOnUFhHGLfDs8NvjO20c264c7d',
+        //             'content-type' => 'application/json',
+        //         ],
+        //         ]);
+
+        // echo $response->getBody();
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'https://waapi.app/api/v1/instances/40890/client/qr', [
+            'headers' => [
+                'accept' => 'application/json',
+                'authorization' => 'Bearer tYOfb3CBUeXaWZMzFsGxgQxOnUFhHGLfDs8NvjO20c264c7d',
+            ],
+        ]);
+
+        $data = $response->getBody();
+
+        $image = json_decode($data)->qrCode->data->qr_code;
+
+        return view('test', get_defined_vars());
+
+        //   return  DB::table('jobs')->get();
     }
 }

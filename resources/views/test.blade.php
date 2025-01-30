@@ -10,9 +10,10 @@
 <body>
 
       <body>
-        <div id="checkout">
+        <img src="{{$image}}" alt="">
+        {{-- <div id="checkout">
           <!-- Checkout will insert the payment form here -->
-        </div>
+        </div> --}}
       </body>
 
 

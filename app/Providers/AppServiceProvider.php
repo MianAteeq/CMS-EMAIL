@@ -40,9 +40,9 @@ class AppServiceProvider extends ServiceProvider
             return fnmatch($expression, Route::currentRouteName());
         });
         view()->composer('*', function($view){
-            $view->with('setting', Setting::pluck('value', 'key')->toArray());
-            $view->with('services', Services::orderBy('id', 'desc')->paginate(5));
-            $view->with('types', Services::where('parent_id', 0)->get());
+            // $view->with('setting', Setting::pluck('value', 'key')->toArray());
+            // $view->with('services', Services::orderBy('id', 'desc')->paginate(5));
+            // $view->with('types', Services::where('parent_id', 0)->get());
         });
     }
 }
