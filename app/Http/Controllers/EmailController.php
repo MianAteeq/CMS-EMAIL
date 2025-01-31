@@ -29,7 +29,7 @@ class EmailController extends Controller
     {
     //    $emails=['fissionmonsterdev@gmail.com'];
 
-        $mails=json_decode($request['emails']);
+         $emails=json_decode($request['emails']);
         foreach($emails as $email){
             $details = [
             'email' => $email,
