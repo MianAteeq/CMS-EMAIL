@@ -300,12 +300,13 @@
                                                                     style="font-size: 14px; line-height: 170%; margin: 0px;">
                                                                     <span
                                                                         style="font-size: 16px; line-height: 27.2px; font-family: 'trebuchet ms', geneva;">{!! $details['message'] !!}</span></p>
+                                                                        @if($details['file_path']!=null)
+                                                                        <div>
+                                                                            <img src="{{$details['file_path']}}" alt="">
+                                                                        </div>
+                                                                        @endif
                                                             </div>
-                                                            @if($details['file_path']!=null)
-                                                            <div>
-                                                                <img src="{{$details['file_path']}}" alt="">
-                                                            </div>
-                                                            @endif
+
 
                                                         </td>
                                                     </tr>
