@@ -60,7 +60,7 @@ class MessaeController extends Controller
         }else{
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
-                    'phone_no' => $phone_number['phone_number'].'@c.us',
+                    'phone_no' => $phone_number->phone_number.'@c.us',
                     'message' => strip_tags($request['message'])
                 ];
 
