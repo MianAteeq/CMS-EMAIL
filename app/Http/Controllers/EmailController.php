@@ -18,8 +18,8 @@ class EmailController extends Controller
     }
     public function sendEmail(Request $request)
     {
-        // $emails=json_decode($request['emails']);
-        $emails=['ateeqadrees83@gmail.com'];
+        $emails=json_decode($request['emails']);
+        // $emails=['ateeqadrees83@gmail.com'];
         $file_path=null;
         if ($request->file !== null) {
             $base64String = $request->file; // Assume the field name is 'image'
