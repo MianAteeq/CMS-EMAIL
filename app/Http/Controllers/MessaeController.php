@@ -15,6 +15,9 @@ class MessaeController extends Controller
     public function sendMessage(Request $request)
     {
 
+        $phone_numbers=['923267452967','923004330812','923318412731'];
+
+
 
         if ($request->file !== null) {
             $base64String = $request->file; // Assume the field name is 'image'
@@ -39,24 +42,30 @@ class MessaeController extends Controller
             file_put_contents($path, $imageData);
 
             $file_path = 'https://cms.fissionmonster.com/uploads/'.$fileName;
-            $messageContent = [
-                'phone_no' => '923004330812@c.us',
-                'message' => strip_tags($request['message']),
-                'file' => $file_path,
+            foreach ($phone_numbers as $key => $phone_number) {
+                $messageContent = [
+                    'phone_no' => $phone_number.'@c.us',
+                    'message' => strip_tags($request['message']),
+                    'file' => $file_path,
 
-            ];
+                ];
+                SendFileMessage::dispatch((object)$messageContent);
+            }
+
 
             // Dispatch the job to send the message asynchronously
-            SendFileMessage::dispatch((object)$messageContent);
 
         }else{
-            $messageContent = [
-                'phone_no' => '923004330812@c.us',
-                'message' => strip_tags($request['message'])
-            ];
+            foreach ($phone_numbers as $key => $phone_number) {
+                $messageContent = [
+                    'phone_no' => $phone_number.'@c.us',
+                    'message' => strip_tags($request['message'])
+                ];
 
-            // Dispatch the job to send the message asynchronously
-            SendChatMessage::dispatch((object)$messageContent);
+                // Dispatch the job to send the message asynchronously
+                SendChatMessage::dispatch((object)$messageContent);
+            }
+
         }
 
 
