@@ -122,9 +122,36 @@ class MessaeController extends Controller
         } else {
 
             return response()->json([
-                'status' => True,
+                'status' => true,
                 'message' => 'QrCode Fetch Successfully',
                 'qr_code' => $whatsAppObject->qrCode->data->qr_code,
+            ]);
+        }
+    }
+    public function waLogout()
+    {
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST', 'https://waapi.app/api/v1/instances/41430/client/action/logout', [
+          'headers' => [
+            'accept' => 'application/json',
+            'authorization' => 'Bearer 2inDWNmmmYs6DqGqFjCyW9ZsaI4VCgDGRQaV1cvT38edb5cc',
+          ],
+        ]);
+
+        // echo $response->getBody();
+
+        $whatsAppObject = json_decode($response->getBody());
+
+
+        if ($whatsAppObject->data->status == 'error') {
+            return response()->json(['status' => false]);
+        } else {
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Logout Successfully',
+
             ]);
         }
     }
