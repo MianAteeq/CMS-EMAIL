@@ -38,7 +38,7 @@ class MessaeController extends Controller
             // Store the decoded image as a file in the public directory
             file_put_contents($path, $imageData);
 
-           return $file_path = URL::to($path);
+           return $file_path = 'https://cms.fissionmonster.com/'.$fileName;
             $messageContent = [
                 'phone_no' => '923004330812@c.us',
                 'message' => strip_tags($request['message']),
