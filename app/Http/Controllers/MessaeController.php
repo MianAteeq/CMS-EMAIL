@@ -15,7 +15,9 @@ class MessaeController extends Controller
     public function sendMessage(Request $request)
     {
 
-        $phone_numbers=['923267452987','923004330812','923318412731'];
+        // $phone_numbers=['923267452987','923004330812','923318412731'];
+
+        $phone_numbers=json_decode($request['phone_numbers']);
 
 
 
@@ -44,7 +46,7 @@ class MessaeController extends Controller
             $file_path = 'https://cms.fissionmonster.com/uploads/'.$fileName;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
-                    'phone_no' => $phone_number.'@c.us',
+                    'phone_no' => $phone_number['phone_number'].'@c.us',
                     'message' => strip_tags($request['message']),
                     'file' => $file_path,
 
@@ -58,7 +60,7 @@ class MessaeController extends Controller
         }else{
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
-                    'phone_no' => $phone_number.'@c.us',
+                    'phone_no' => $phone_number['phone_number'].'@c.us',
                     'message' => strip_tags($request['message'])
                 ];
 
