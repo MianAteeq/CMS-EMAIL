@@ -33,7 +33,7 @@ class MessaeController extends Controller
             // Store the image in the 'public' disk (you can choose another disk if needed)
             $path = Storage::disk('public')->put($fileName, $imageData);
 
-            $file_path = URL::to($fileName);
+           return $file_path = URL::to($fileName);
             $messageContent = [
                 'phone_no' => '923004330812@c.us',
                 'message' => strip_tags($request['message']),
