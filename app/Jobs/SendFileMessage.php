@@ -44,7 +44,7 @@ class SendFileMessage implements ShouldQueue
             'body' => json_encode([
                 'chatId' => $chatId,
                 "message"=>$message,
-                "mediaUrl"=>$file??"https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&w=600",
+                "mediaUrl"=>"https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&w=600",
                 "mediaCaption"=>$message
             ]),
             'headers' => [
