@@ -295,19 +295,15 @@
                                                             align="left">
 
                                                             <div class="v-text-align"
-                                                                style="font-size: 14px; color: #ffffff; line-height: 170%; text-align: center; word-wrap: break-word;">
+                                                                style="font-size: 14px; color: #ffffff; line-height: 170%;word-wrap: break-word;">
                                                                 <p
                                                                     style="font-size: 14px; line-height: 170%; margin: 0px;">
                                                                     <span
                                                                         style="font-size: 16px; line-height: 27.2px; font-family: 'trebuchet ms', geneva;">{!! $details['message'] !!}</span></p>
                                                             </div>
                                                             @if($details['file_path']!=null)
-                                                            <div class="v-text-align"
-                                                                style="font-size: 14px; color: #ffffff; line-height: 170%; text-align: center; word-wrap: break-word;">
-                                                                <p
-                                                                    style="font-size: 14px; line-height: 170%; margin: 0px;">
-                                                                    <span
-                                                                        style="font-size: 16px; line-height: 27.2px; font-family: 'trebuchet ms', geneva;"><img src="{{$details['file_path']}}" alt=""></span></p>
+                                                            <div>
+                                                                <img src="{{$details['file_path']}}" alt="">
                                                             </div>
                                                             @endif
 
