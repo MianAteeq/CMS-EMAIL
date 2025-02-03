@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('quotation_items', function (Blueprint $table) {
             //
-            // $table->string('job_item_no')->nullable();
+            $table->string('job_item_no')->nullable();
         });
     }
 
@@ -27,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('quotation_items', function (Blueprint $table) {
-            // $table->dropColumn('job_item_no')->nullable();
+            $table->dropColumn('job_item_no')->nullable();
 
         });
     }

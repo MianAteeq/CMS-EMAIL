@@ -77,7 +77,6 @@ use Modules\Vender\Http\Controllers\ServiceProviderController;
 
 Route::get('/test/jobs', [EmailController::class, 'getEmail']);
 Route::get('/send/message', [MessaeController::class, 'sendMessage']);
-Route::get('/get/instance', [MessaeController::class, 'getWhatsAppInfo']);
 Route::get('/get/qr/code', [MessaeController::class, 'getWhatsAppIQrCode']);
 
 
