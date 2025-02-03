@@ -31,7 +31,7 @@ class MessaeController extends Controller
             $fileName = 'image_' . Str::random(10) . '.png';
 
             // Store the image in the 'public' disk (you can choose another disk if needed)
-            $path = Storage::disk('public')->put($fileName, $imageData);
+            $path = Storage::disk('public/uploads')->put($fileName, $imageData);
 
             $file_path = URL::to($fileName);
             $messageContent = [
