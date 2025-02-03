@@ -31,9 +31,14 @@ class MessaeController extends Controller
             $fileName = 'image_' . Str::random(10) . '.png';
 
             // Store the image in the 'public' disk (you can choose another disk if needed)
-            $path = Storage::disk('uploads')->put($fileName, $imageData);
+            // $path = Storage::disk('public')->put($fileName, $imageData);
 
-            $file_path = URL::to($fileName);
+            $path = public_path('uploads/' . $fileName); // This will save the file in public/uploads folder
+
+            // Store the decoded image as a file in the public directory
+            file_put_contents($path, $imageData);
+
+            $file_path = URL::to($path);
             $messageContent = [
                 'phone_no' => '923004330812@c.us',
                 'message' => strip_tags($request['message']),
