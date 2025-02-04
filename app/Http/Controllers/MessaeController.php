@@ -44,6 +44,7 @@ class MessaeController extends Controller
             file_put_contents($path, $imageData);
 
             $file_path = 'https://cms.fissionmonster.com/uploads/'.$fileName;
+            $delay = 0;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
                     'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
@@ -51,13 +52,15 @@ class MessaeController extends Controller
                     'file' => $file_path,
 
                 ];
-                SendFileMessage::dispatch((object)$messageContent);
+                SendFileMessage::dispatch((object)$messageContent)->delay(now()->addSeconds($delay));
+                $delay += 20;
             }
 
 
             // Dispatch the job to send the message asynchronously
 
         }else{
+            $delay = 0;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
                     'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
@@ -65,7 +68,8 @@ class MessaeController extends Controller
                 ];
 
                 // Dispatch the job to send the message asynchronously
-                SendChatMessage::dispatch((object)$messageContent);
+                SendChatMessage::dispatch((object)$messageContent)->delay(now()->addSeconds($delay));
+                $delay += 20;
             }
 
         }

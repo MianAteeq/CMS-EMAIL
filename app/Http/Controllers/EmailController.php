@@ -13,6 +13,19 @@ class EmailController extends Controller
     public function getEmail(Request $request)
     {
 
+    //     $delay = 0;
+    //    for ($i=0; $i < 10; $i++) {
+    //     $details = [
+    //         'email' => 'ateeqadrees83@gmail.com',
+    //         'title' => 'Subject',
+    //         'message' => 'Message',
+    //         'company_email' => $request['company_email']??env('MAIL_FROM_ADDRESS'),
+    //         'company' => $request['company']??env('MAIL_FROM_NAME'),
+    //         'file_path'=>null
+    //     ];
+    //     SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
+    //     $delay += 10;
+    //    }
 
       return  DB::table('jobs')->count();
     }
@@ -47,6 +60,7 @@ class EmailController extends Controller
 
 
         }
+        $delay = 0;
         foreach($emails as $email){
             $details = [
             'email' => $email,
@@ -59,12 +73,13 @@ class EmailController extends Controller
 
         if($request['company']==="Fission Monster"){
 
-            SendEmailJobFM::dispatch($details);
+            SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
         }else{
 
-            SendEmailJob::dispatch($details);
+            SendEmailJob::dispatch($details)->delay(now()->addSeconds($delay));
         }
 
+        $delay += 10;
 
         // Mail::send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
         //     $m->to($details['email'])->subject($details['title']);
