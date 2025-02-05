@@ -53,7 +53,7 @@ class MessaeController extends Controller
 
                 ];
                 SendFileMessage::dispatch((object)$messageContent)->delay(now()->addSeconds($delay));
-                $delay += 20;
+                $delay += 30;
             }
 
 
@@ -69,7 +69,7 @@ class MessaeController extends Controller
 
                 // Dispatch the job to send the message asynchronously
                 SendChatMessage::dispatch((object)$messageContent)->delay(now()->addSeconds($delay));
-                $delay += 20;
+                $delay += 30;
             }
 
         }
