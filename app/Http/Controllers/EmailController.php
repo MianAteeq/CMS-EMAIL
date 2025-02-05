@@ -23,8 +23,9 @@ class EmailController extends Controller
     //         'company' => $request['company']??env('MAIL_FROM_NAME'),
     //         'file_path'=>null
     //     ];
-    //     SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
-    //     $delay += 10;
+    //     Mail::send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
+    //         $m->to($details['email'])->subject($details['title']);
+    //     });
     //    }
 
       return  DB::table('jobs')->count();
