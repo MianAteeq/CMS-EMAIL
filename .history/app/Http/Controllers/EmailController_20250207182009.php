@@ -201,14 +201,6 @@ class EmailController extends Controller
         $fm_weekly_sms=0;
         $fm_daily_sms=0;
 
-        $dental_services_monthly_email=0;
-        $dental_services_weekly_email=0;
-        $dental_services_daily_email=0;
-
-        $dental_services_monthly_sms=0;
-        $dental_services_weekly_sms=0;
-        $dental_services_daily_sms=0;
-
         foreach ($records as $key => $record) {
 
             if($key==="IADSR"){
@@ -259,27 +251,6 @@ class EmailController extends Controller
 
         }
 
-        return response()->json([
-            'iadsr_monthly_email'=>$iadsr_monthly_email,
-            'iadsr_weekly_email'=>$iadsr_weekly_email,
-            'iadsr_daily_email'=>$iadsr_daily_email,
-            'iadsr_monthly_sms'=>$iadsr_monthly_sms,
-            'iadsr_weekly_sms'=>$iadsr_weekly_sms,
-            'iadsr_daily_sms'=>$iadsr_daily_sms,
-
-            'fm_monthly_email'=>$fm_monthly_email,
-            'fm_weekly_email'=>$fm_weekly_email,
-            'fm_daily_email'=>$fm_daily_email,
-            'fm_monthly_sms'=>$fm_monthly_sms,
-            'fm_weekly_sms'=>$fm_weekly_sms,
-            'fm_daily_sms'=>$fm_daily_sms,
-
-            'dental_services_monthly_email'=>$dental_services_monthly_email,
-            'dental_services_weekly_email'=>$dental_services_weekly_email,
-            'dental_services_daily_email'=>$dental_services_daily_email,
-            'dental_services_monthly_sms'=>$dental_services_monthly_sms,
-            'dental_services_weekly_sms'=>$dental_services_weekly_sms,
-            'dental_services_daily_sms'=>$dental_services_daily_sms,
-        ]);
+        return get_defined_vars();
     }
 }

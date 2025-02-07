@@ -78,7 +78,7 @@ class MessaeController extends Controller
         }
 
         $data = new stdClass();
-        $data->type = "Message";
+        $data->type = "Email";
         $data->company = $request['company'];
         $data->date = Carbon::now();
         $data->totalRecord = count($phone_numbers);
