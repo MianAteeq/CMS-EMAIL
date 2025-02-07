@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
-use App\Jobs\SendEmailJobDental;
 use App\Jobs\SendEmailJobFM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -70,13 +69,12 @@ class EmailController extends Controller
 
         }
         $delay = 0;
-
         foreach($emails as $email){
             $details = [
             'email' => $email,
             'title' => $request['subject'],
             'message' => $request['message'],
-            'company_email' => $request['company_email']??env('MAIL_FM_FROM_ADDRESS'),
+            'company_email' => $request['company_email']??env('MAIL_FROM_ADDRESS'),
             'company' => $request['company']??env('MAIL_FROM_NAME'),
             'file_path'=>$file_path
         ];
@@ -84,11 +82,9 @@ class EmailController extends Controller
         if($request['company']==="Fission Monster"){
 
             SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
-        }elseif($request['company']==="IADSR"){
+        }else{
 
             SendEmailJob::dispatch($details)->delay(now()->addSeconds($delay));
-        }else{
-            SendEmailJobDental::dispatch($details)->delay(now()->addSeconds($delay));
         }
 
         $delay += 10;

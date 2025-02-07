@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendEmailTest extends Mailable
+class SendEmailDental extends Mailable
 {
     public $details;
 
@@ -20,8 +20,7 @@ class SendEmailTest extends Mailable
 
     public function build()
     {
-
-        return $this->from(env('MAIL_IADSR_FROM_ADDRESS'), $this->details['company'])->subject($this->details['title'])->view('emails.test_email')->with('details', $this->details);
+        return $this->from(env('MAIL_DENTAL_FROM_ADDRESS'), $this->details['company'])->subject($this->details['title'])->view('emails.fm_one')->with('details', $this->details);
 
     }
 }

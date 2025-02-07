@@ -36,7 +36,7 @@ return [
     'mailers' => [
         'iadsr' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_IADSR_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_IADSR_USERNAME'),
@@ -46,8 +46,8 @@ return [
         ],
         'fm' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_FM_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_FM_PORT', 587),
+            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_FM_USERNAME'),
             'password' => env('MAIL_FM_PASSWORD'),
@@ -56,7 +56,7 @@ return [
         ],
         'dental' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_DENTAL_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_DENTAL_USERNAME'),

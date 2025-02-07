@@ -3,95 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
-use App\Jobs\SendEmailJobDental;
 use App\Jobs\SendEmailJobFM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
+
 class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        // $details = [
-        //     'email' => 'ateeqadrees83@gmail.com',
-        //     'title' => 'Subject: Test Email',
-        //     'message' => 'This is a test email from Laravel',
-        //     'company_email' =>env('MAIL_FROM_ADDRESS'),
-        //     'company' => $request['company']??env('MAIL_FROM_NAME'),
-        //     'file_path'=>NULL
-        // ];
-
-        // Mail::mailer('fm')->send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
-        //     $m->to($details['email'])->subject($details['title']);
-        // });
-
-        // return;
 
 
       return  DB::table('jobs')->count();
     }
     public function sendEmail(Request $request)
     {
-        // return $request;
-        // if($request['company']==='IADSR'){
-        //   return  $envFile = app()->environmentFilePath();
-        // }elseif($request['company']==='Fission Monster'){
-
-        // }else{
-
-        // }
-        $emails=['ateeqadrees83@gmail.com'];
-        $file_path=null;
-        if ($request->file !== null) {
-            $base64String = $request->file; // Assume the field name is 'image'
-
-            // Remove the part before the base64 data (if it exists, like "data:image/png;base64,")
-            if (strpos($base64String, 'data:image') === 0) {
-                $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64String);
-            }
-
-            // Decode the Base64 string
-            $imageData = base64_decode($base64String);
-
-            // Create a unique file name for the image
-            $fileName = 'image_' . Str::random(10) . '.png';
-
-            // Store the image in the 'public' disk (you can choose another disk if needed)
-            // $path = Storage::disk('public')->put($fileName, $imageData);
-
-            $path = public_path('uploads/' . $fileName); // This will save the file in public/uploads folder
-
-            // Store the decoded image as a file in the public directory
-            file_put_contents($path, $imageData);
-
-            $file_path = 'https://cms.fissionmonster.com/uploads/'.$fileName;
 
 
-        }
-        $delay = 0;
-
+         $emails=json_decode($request['emails']);
         foreach($emails as $email){
             $details = [
             'email' => $email,
             'title' => $request['subject'],
             'message' => $request['message'],
-            'company_email' => $request['company_email']??env('MAIL_FM_FROM_ADDRESS'),
+            'company_email' => $request['company_email']??env('MAIL_FROM_ADDRESS'),
             'company' => $request['company']??env('MAIL_FROM_NAME'),
-            'file_path'=>$file_path
         ];
 
         if($request['company']==="Fission Monster"){
 
-            SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
-        }elseif($request['company']==="IADSR"){
-
-            SendEmailJob::dispatch($details)->delay(now()->addSeconds($delay));
+            SendEmailJobFM::dispatch($details);
         }else{
-            SendEmailJobDental::dispatch($details)->delay(now()->addSeconds($delay));
+
+            SendEmailJob::dispatch($details);
         }
 
-        $delay += 10;
 
         // Mail::send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
         //     $m->to($details['email'])->subject($details['title']);

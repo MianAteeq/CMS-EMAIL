@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
-use App\Jobs\SendEmailJobDental;
 use App\Jobs\SendEmailJobFM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,20 +12,20 @@ class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        // $details = [
-        //     'email' => 'ateeqadrees83@gmail.com',
-        //     'title' => 'Subject: Test Email',
-        //     'message' => 'This is a test email from Laravel',
-        //     'company_email' =>env('MAIL_FROM_ADDRESS'),
-        //     'company' => $request['company']??env('MAIL_FROM_NAME'),
-        //     'file_path'=>NULL
-        // ];
+        $details = [
+            'email' => 'ateeqadrees83@gmail.com',
+            'title' => 'Subject: Test Email',
+            'message' => 'This is a test email from Laravel',
+            'company_email' =>env('MAIL_FROM_ADDRESS'),
+            'company' => $request['company']??env('MAIL_FROM_NAME'),
+            'file_path'=>NULL
+        ];
 
-        // Mail::mailer('fm')->send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
-        //     $m->to($details['email'])->subject($details['title']);
-        // });
+        Mail::send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
+            $m->to($details['email'])->subject($details['title']);
+        });
 
-        // return;
+        return;
 
 
       return  DB::table('jobs')->count();
@@ -70,13 +69,12 @@ class EmailController extends Controller
 
         }
         $delay = 0;
-
         foreach($emails as $email){
             $details = [
             'email' => $email,
             'title' => $request['subject'],
             'message' => $request['message'],
-            'company_email' => $request['company_email']??env('MAIL_FM_FROM_ADDRESS'),
+            'company_email' => $request['company_email']??env('MAIL_FROM_ADDRESS'),
             'company' => $request['company']??env('MAIL_FROM_NAME'),
             'file_path'=>$file_path
         ];
@@ -84,11 +82,9 @@ class EmailController extends Controller
         if($request['company']==="Fission Monster"){
 
             SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
-        }elseif($request['company']==="IADSR"){
+        }else{
 
             SendEmailJob::dispatch($details)->delay(now()->addSeconds($delay));
-        }else{
-            SendEmailJobDental::dispatch($details)->delay(now()->addSeconds($delay));
         }
 
         $delay += 10;

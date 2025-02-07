@@ -2,7 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendEmailFM;
 use App\Mail\SendEmailTest;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -10,7 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendEmailJob implements ShouldQueue
+class SendEmailJobFM implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -23,6 +25,6 @@ class SendEmailJob implements ShouldQueue
 
     public function handle()
     {
-        Mail::mailer('iadsr')->to($this->details['email'])->send(new SendEmailTest($this->details));
+        Mail::to($this->details['email'])->send(new SendEmailFM($this->details))->delay(Carbon::now()->addSeconds(90));
     }
 }

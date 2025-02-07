@@ -104,7 +104,7 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_menu_1 .v-p
   <tr>
     <td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-      <img align="center" border="0" src="https://iadsr.edu.pk/wp-content/uploads/2020/12/IADSRnewlogo.jpg" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 47%;max-width: 272.6px;" width="272.6"/>
+      <img align="center" border="0" src="https://iadsr.edu.pk/dentalservices/wp-content/uploads/2024/11/Asset-20-2.png" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 47%;max-width: 272.6px;" width="272.6"/>
 
     </td>
   </tr>
@@ -148,7 +148,7 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_menu_1 .v-p
 
   <!--[if (mso)|(IE)]><td style="padding:12px 15px 5px"><![endif]-->
 
-    <a href="https://iadsr.edu.pk/" target="_self" style="padding: 12px 15px 5px; display: inline-block; color: rgb(255, 255, 255); font-family: arial, helvetica, sans-serif; font-size: 14px; text-decoration: none; line-height: inherit;" class="v-padding v-font-size">Home
+    <a href="https://iadsr.edu.pk/dentalservices/" target="_self" style="padding: 12px 15px 5px; display: inline-block; color: rgb(255, 255, 255); font-family: arial, helvetica, sans-serif; font-size: 14px; text-decoration: none; line-height: inherit;" class="v-padding v-font-size">Home
     </a>
 
   <!--[if (mso)|(IE)]></td><![endif]-->
@@ -156,7 +156,7 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_menu_1 .v-p
 
   <!--[if (mso)|(IE)]><td style="padding:12px 15px 5px"><![endif]-->
 
-    <a href="https://iadsr.edu.pk/courses/" target="_self" style="padding: 12px 15px 5px; display: inline-block; color: rgb(255, 255, 255); font-family: arial, helvetica, sans-serif; font-size: 14px; text-decoration: none; line-height: inherit;" class="v-padding v-font-size">Courses
+    <a href="https://iadsr.edu.pk/dentalservices/services-2/" target="_self" style="padding: 12px 15px 5px; display: inline-block; color: rgb(255, 255, 255); font-family: arial, helvetica, sans-serif; font-size: 14px; text-decoration: none; line-height: inherit;" class="v-padding v-font-size">Services
     </a>
 
   <!--[if (mso)|(IE)]></td><![endif]-->
@@ -164,7 +164,7 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_menu_1 .v-p
 
   <!--[if (mso)|(IE)]><td style="padding:12px 15px 5px"><![endif]-->
 
-    <a href="https://iadsr.edu.pk/contact/" target="_self" style="padding: 12px 15px 5px; display: inline-block; color: rgb(255, 255, 255); font-family: arial, helvetica, sans-serif; font-size: 14px; text-decoration: none; line-height: inherit;" class="v-padding v-font-size">Contact Us
+    <a href="https://iadsr.edu.pk/dentalservices/contact-us/" target="_self" style="padding: 12px 15px 5px; display: inline-block; color: rgb(255, 255, 255); font-family: arial, helvetica, sans-serif; font-size: 14px; text-decoration: none; line-height: inherit;" class="v-padding v-font-size">Contact Us
     </a>
 
   <!--[if (mso)|(IE)]></td><![endif]-->
@@ -258,15 +258,15 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_menu_1 .v-p
     <tr>
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Montserrat',sans-serif;" align="left">
 
-  <div class="v-font-size" style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
-    <p style="line-height: 140%; margin: 0px;">{!! $details['message'] !!}</p>
+        <div class="v-font-size" style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
+            <p style="line-height: 140%; margin: 0px;">{!! $details['message'] !!}</p>
 
-    @if($details['file_path']!=null)
-    <p style="line-height: 140%; margin: 0px;">
-        <img src="{{$details['file_path']}}" alt="">
-    </p>
-    @endif
-  </div>
+            @if($details['file_path']!=null)
+            <p style="line-height: 140%; margin: 0px;">
+                <img src="{{$details['file_path']}}" alt="">
+            </p>
+            @endif
+          </div>
 
       </td>
     </tr>
@@ -358,7 +358,7 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_menu_1 .v-p
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 40px;font-family:'Montserrat',sans-serif;" align="left">
 
   <div class="v-font-size" style="font-size: 14px; line-height: 140%; text-align: center; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 140%; margin: 0px;">22 Pine Avenue, Main Boulevard, Lahore.</p>
+    <p style="font-size: 14px; line-height: 140%; margin: 0px;">194 CCA, Sector DD Phase 4, DHA , LAHORE.</p>
 <p style="font-size: 14px; line-height: 140%; margin: 0px;">Preferences | Unsubscribe &nbsp;| View in browser</p>
   </div>
 

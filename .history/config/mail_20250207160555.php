@@ -47,7 +47,7 @@ return [
         'fm' => [
             'transport' => 'smtp',
             'host' => env('MAIL_FM_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_FM_PORT', 587),
+            'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_FM_USERNAME'),
             'password' => env('MAIL_FM_PASSWORD'),

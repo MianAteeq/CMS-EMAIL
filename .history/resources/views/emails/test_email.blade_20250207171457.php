@@ -259,7 +259,7 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_menu_1 .v-p
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Montserrat',sans-serif;" align="left">
 
   <div class="v-font-size" style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
-    <p style="line-height: 140%; margin: 0px;">{!! $details['message'] !!}</p>
+    <p style="line-height: 140%; margin: 0px;">{{ $details['message'] }}</p>
 
     @if($details['file_path']!=null)
     <p style="line-height: 140%; margin: 0px;">

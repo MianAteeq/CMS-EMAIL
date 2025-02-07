@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
-use App\Jobs\SendEmailJobDental;
 use App\Jobs\SendEmailJobFM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,35 +12,25 @@ class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        // $details = [
-        //     'email' => 'ateeqadrees83@gmail.com',
-        //     'title' => 'Subject: Test Email',
-        //     'message' => 'This is a test email from Laravel',
-        //     'company_email' =>env('MAIL_FROM_ADDRESS'),
-        //     'company' => $request['company']??env('MAIL_FROM_NAME'),
-        //     'file_path'=>NULL
-        // ];
 
-        // Mail::mailer('fm')->send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
-        //     $m->to($details['email'])->subject($details['title']);
-        // });
-
-        // return;
-
+       for ($i=0; $i < 10; $i++) {
+        $details = [
+            'email' => 'ateeqadrees83@gmail.com',
+            'title' => 'Subject',
+            'message' => 'Message',
+            'company_email' => $request['company_email']??env('MAIL_FROM_ADDRESS'),
+            'company' => $request['company']??env('MAIL_FROM_NAME'),
+            'file_path'=>null
+        ];
+        SendEmailJobFM::dispatch($details)->delay(now()->addMinutes(10));
+       }
 
       return  DB::table('jobs')->count();
     }
     public function sendEmail(Request $request)
     {
-        // return $request;
-        // if($request['company']==='IADSR'){
-        //   return  $envFile = app()->environmentFilePath();
-        // }elseif($request['company']==='Fission Monster'){
-
-        // }else{
-
-        // }
-        $emails=['ateeqadrees83@gmail.com'];
+        $emails=json_decode($request['emails']);
+        // $emails=['ateeqadrees83@gmail.com'];
         $file_path=null;
         if ($request->file !== null) {
             $base64String = $request->file; // Assume the field name is 'image'
@@ -69,29 +58,24 @@ class EmailController extends Controller
 
 
         }
-        $delay = 0;
-
         foreach($emails as $email){
             $details = [
             'email' => $email,
             'title' => $request['subject'],
             'message' => $request['message'],
-            'company_email' => $request['company_email']??env('MAIL_FM_FROM_ADDRESS'),
+            'company_email' => $request['company_email']??env('MAIL_FROM_ADDRESS'),
             'company' => $request['company']??env('MAIL_FROM_NAME'),
             'file_path'=>$file_path
         ];
 
         if($request['company']==="Fission Monster"){
 
-            SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
-        }elseif($request['company']==="IADSR"){
-
-            SendEmailJob::dispatch($details)->delay(now()->addSeconds($delay));
+            SendEmailJobFM::dispatch($details);
         }else{
-            SendEmailJobDental::dispatch($details)->delay(now()->addSeconds($delay));
+
+            SendEmailJob::dispatch($details);
         }
 
-        $delay += 10;
 
         // Mail::send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
         //     $m->to($details['email'])->subject($details['title']);
