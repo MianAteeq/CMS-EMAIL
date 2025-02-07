@@ -41,7 +41,7 @@ class EmailController extends Controller
         // }else{
 
         // }
-        $emails=['ateeqadrees83@gmail.com'];
+        $emails=json_decode($request['emails']);
         $file_path=null;
         if ($request->file !== null) {
             $base64String = $request->file; // Assume the field name is 'image'
