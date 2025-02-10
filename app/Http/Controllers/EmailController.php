@@ -81,12 +81,12 @@ class EmailController extends Controller
 
         if($request['company']==="Fission Monster"){
 
-            SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
+            SendEmailJobFM::dispatch($details);
         }elseif($request['company']==="IADSR"){
 
-            SendEmailJob::dispatch($details)->delay(now()->addSeconds($delay));
+            SendEmailJob::dispatch($details);
         }else{
-            SendEmailJobDental::dispatch($details)->delay(now()->addSeconds($delay));
+            SendEmailJobDental::dispatch($details);
         }
 
         $delay += 10;
