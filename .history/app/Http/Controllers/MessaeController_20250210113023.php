@@ -181,11 +181,7 @@ class MessaeController extends Controller
         ]);
 
         $whatsAppObject = json_decode($response->getBody());
-        if ($whatsAppObject->status == 'error') {
-            return response()->json(['status' => false]);
-        } else {
-            return response()->json(['status' => true, 'data' => $whatsAppObject->me]);
-        }
-        // return response()->json(['status' => true, 'data' => $whatsAppObject->me]);
+
+        return response()->json(['status' => false, 'data' => $whatsAppObject->me]);
     }
 }

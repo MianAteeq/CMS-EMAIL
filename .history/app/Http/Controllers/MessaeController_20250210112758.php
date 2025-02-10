@@ -171,21 +171,6 @@ class MessaeController extends Controller
     }
 
     public function getWAStatus(){
-        $client = new \GuzzleHttp\Client();
-
-        $response = $client->request('GET', 'https://waapi.app/api/v1/instances/41430/client/me', [
-          'headers' => [
-            'accept' => 'application/json',
-            'authorization' => 'Bearer 2inDWNmmmYs6DqGqFjCyW9ZsaI4VCgDGRQaV1cvT38edb5cc',
-          ],
-        ]);
-
-        $whatsAppObject = json_decode($response->getBody());
-        if ($whatsAppObject->status == 'error') {
-            return response()->json(['status' => false]);
-        } else {
-            return response()->json(['status' => true, 'data' => $whatsAppObject->me]);
-        }
-        // return response()->json(['status' => true, 'data' => $whatsAppObject->me]);
+        
     }
 }

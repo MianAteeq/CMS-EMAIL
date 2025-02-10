@@ -179,13 +179,9 @@ class MessaeController extends Controller
             'authorization' => 'Bearer 2inDWNmmmYs6DqGqFjCyW9ZsaI4VCgDGRQaV1cvT38edb5cc',
           ],
         ]);
-
+        
         $whatsAppObject = json_decode($response->getBody());
-        if ($whatsAppObject->status == 'error') {
-            return response()->json(['status' => false]);
-        } else {
-            return response()->json(['status' => true, 'data' => $whatsAppObject->me]);
-        }
-        // return response()->json(['status' => true, 'data' => $whatsAppObject->me]);
+
+        return response()->json(['status' => false, 'data' => $whatsAppObject->me]);
     }
 }
