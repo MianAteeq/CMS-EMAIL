@@ -37,6 +37,12 @@ class EmailController extends Controller
     }
     public function sendEmail(Request $request)
     {
+        if(DB::table('jobs')->count()>0){
+            return response()->json([
+                'message' => 'Email sending in progress!',
+                'status' => false
+            ]);
+        }
 
         $emails=json_decode($request['emails']);
         // $emails=['ateeqadrees83@gmail.com'];

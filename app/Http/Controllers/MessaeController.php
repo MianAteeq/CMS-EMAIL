@@ -7,6 +7,7 @@ use App\Jobs\SendFileMessage;
 use App\Models\DataLog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
@@ -18,7 +19,12 @@ class MessaeController extends Controller
     public function sendMessage(Request $request)
     {
 
-        // $phone_numbers=['+923267452987','+923004330812'];
+        if(DB::table('jobs')->count()>0){
+            return response()->json([
+                'message' => 'Message sending in progress!',
+                'status' => false
+            ]);
+        }
 
         $phone_numbers=json_decode($request['phone_numbers']);
 
