@@ -307,40 +307,35 @@ class EmailController extends Controller
                 "company"=> "Fission Monster",
             ],
             [
-                "id"=> 2,
+                ,
                 "date"=> "2025-02-10 09:04:09",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "IADSR",
-                "created_at"=> "2025-02-10T09:04:09.000000Z",
-                "updated_at"=> "2025-02-10T09:04:09.000000Z"
+
             ],
                 [
-                "id"=> 6,
+
                 "date"=> "2025-02-20 09:17:55",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "IADSR",
-                "created_at"=> "2025-02-20T09:17:55.000000Z",
-                "updated_at"=> "2025-02-20T09:17:55.000000Z"
+
                 ],
                 [
-                "id"=> 11,
                 "date"=> "2025-02-24 11:14:08",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "IADSR",
-                "created_at"=> "2025-02-24T11:14:08.000000Z",
-                "updated_at"=> "2025-02-24T11:14:08.000000Z"
+
                 ],
                 [
-                "id"=> 13,
+
                 "date"=> "2025-02-25 10:26:23",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "IADSR",
-                "created_at"=> "2025-02-25T10:26:23.000000Z",
-                "updated_at"=> "2025-02-25T10:26:23.000000Z"
+
                 ]
 
                 ];
