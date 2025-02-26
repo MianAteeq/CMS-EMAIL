@@ -188,7 +188,7 @@ class EmailController extends Controller
 
 
     public function getStat(){
-        return  $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+          $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
         ->where('type','Email')->get()->groupBy('company');
 
         $iadsr_monthly_email=0;
@@ -289,7 +289,7 @@ class EmailController extends Controller
         ]);
     }
     public function getWPStatus(){
-       $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+        return $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
         ->where('type','Email')->get()->groupBy('company');
 
         $iadsr_monthly_email=0;
