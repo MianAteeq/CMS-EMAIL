@@ -289,8 +289,8 @@ class EmailController extends Controller
         ]);
     }
     public function getWPStatus(){
-         $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
-        ->where('type','Email')->get()->groupBy('company');
+       return  $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+        ->where('type','Message')->get()->groupBy('company');
 
 
         $array = [
