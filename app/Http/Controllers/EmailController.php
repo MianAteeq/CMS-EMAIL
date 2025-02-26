@@ -295,20 +295,19 @@ class EmailController extends Controller
 
         $array = [
             [
-                "date"=> "2025-02-07 13:37:20",
+                "date" => "2025-02-07",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "Fission Monster",
             ],
             [
-                "date"=> "2025-02-20 11:07:34",
+                "date"=> "2025-02-20",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "Fission Monster",
             ],
             [
-                ,
-                "date"=> "2025-02-10 09:04:09",
+                "date"=> "2025-02-10",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "IADSR",
@@ -316,14 +315,14 @@ class EmailController extends Controller
             ],
                 [
 
-                "date"=> "2025-02-20 09:17:55",
+                "date"=> "2025-02-20",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "IADSR",
 
                 ],
                 [
-                "date"=> "2025-02-24 11:14:08",
+                "date"=> "2025-02-24",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "IADSR",
@@ -331,7 +330,7 @@ class EmailController extends Controller
                 ],
                 [
 
-                "date"=> "2025-02-25 10:26:23",
+                "date"=> "2025-02-25",
                 "totalRecord"=> 1000,
                 "type"=> "Email",
                 "company"=> "IADSR",
