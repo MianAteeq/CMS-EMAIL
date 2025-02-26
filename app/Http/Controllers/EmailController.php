@@ -289,50 +289,72 @@ class EmailController extends Controller
         ]);
     }
     public function getWPStatus(){
-       return  $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+         $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
         ->where('type','Message')->get()->groupBy('company');
 
 
         $array = [
-            [
-                "date" => "2025-02-07",
-                "totalRecord"=> 1000,
-                "type"=> "Email",
-                "company"=> "Fission Monster",
-            ],
-            [
-                "date"=> "2025-02-20",
-                "totalRecord"=> 1000,
-                "type"=> "Email",
-                "company"=> "Fission Monster",
-            ],
-            [
+           [
+
                 "date"=> "2025-02-10",
-                "totalRecord"=> 1000,
-                "type"=> "Email",
+                "totalRecord"=> 50,
+                "type"=> "Message",
                 "company"=> "IADSR",
 
-            ],
-                [
+           ],
+               [
+
+                "date"=> "2025-02-11",
+                "totalRecord"=> 50,
+                "type"=> "Message",
+                "company"=> "IADSR",
+
+               ],
+               [
+
+                "date"=> "2025-02-18",
+                "totalRecord"=> 50,
+                "type"=> "Message",
+                "company"=> "IADSR",
+
+               ],
+               [
 
                 "date"=> "2025-02-20",
-                "totalRecord"=> 1000,
-                "type"=> "Email",
+                "totalRecord"=> 50,
+                "type"=> "Message",
                 "company"=> "IADSR",
 
-                ],
-                [
+               ],
+               [
+
+                "date"=> "2025-02-20",
+                "totalRecord"=> 50,
+                "type"=> "Message",
+                "company"=> "IADSR",
+
+               ],
+               [
+
+                "date"=> "2025-02-21",
+                "totalRecord"=> 50,
+                "type"=> "Message",
+                "company"=> "IADSR",
+
+               ],
+               [
+
                 "date"=> "2025-02-24",
-                "totalRecord"=> 1000,
-                "type"=> "Email",
+                "totalRecord"=> 50,
+                "type"=> "Message",
                 "company"=> "IADSR",
 
-                ],
-                [
+               ],
+               [
 
                 "date"=> "2025-02-25",
-                "totalRecord"=> 1000,
-                "type"=> "Email",
+                "totalRecord"=> 50,
+                "type"=> "Message",
                 "company"=> "IADSR",
 
                 ]
@@ -367,7 +389,7 @@ class EmailController extends Controller
         $dental_services_weekly_sms=0;
         $dental_services_daily_sms=0;
 
-        foreach ($records as $key => $record) {
+        foreach ($records as $key => $record){
 
             if($key==="IADSR"){
                 $iadsr_monthly_email=DataLog::where('date', '>=', Carbon::now()->subDays(30))
