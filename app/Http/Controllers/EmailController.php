@@ -188,6 +188,107 @@ class EmailController extends Controller
 
 
     public function getStat(){
+        return  $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+        ->where('type','Email')->get()->groupBy('company');
+
+        $iadsr_monthly_email=0;
+        $iadsr_weekly_email=0;
+        $iadsr_daily_email=0;
+
+        $iadsr_monthly_sms=0;
+        $iadsr_weekly_sms=0;
+        $iadsr_daily_sms=0;
+
+        $fm_monthly_email=0;
+        $fm_weekly_email=0;
+        $fm_daily_email=0;
+
+        $fm_monthly_sms=0;
+        $fm_weekly_sms=0;
+        $fm_daily_sms=0;
+
+        $dental_services_monthly_email=0;
+        $dental_services_weekly_email=0;
+        $dental_services_daily_email=0;
+
+        $dental_services_monthly_sms=0;
+        $dental_services_weekly_sms=0;
+        $dental_services_daily_sms=0;
+
+        foreach ($records as $key => $record) {
+
+            if($key==="IADSR"){
+                $iadsr_monthly_email=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+                ->where('type','Email')->where('company',$key)->sum('totalRecord');
+                $iadsr_weekly_email=DataLog::where('date', '>=', Carbon::now()->subDays(7))
+                ->where('type','Email')->where('company',$key)->sum('totalRecord');
+                $iadsr_daily_email=DataLog::whereDate('created_at', '=', Carbon::now()->toDateString())
+                ->where('type','Email')->where('company',$key)->sum('totalRecord');
+
+                $iadsr_monthly_sms=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+                ->where('type','Message')->where('company',$key)->sum('totalRecord');
+                $iadsr_weekly_sms=DataLog::where('date', '>=', Carbon::now()->subDays(7))
+                ->where('type','Message')->where('company',$key)->sum('totalRecord');
+                $iadsr_daily_sms=DataLog::whereDate('created_at', '=', Carbon::now()->toDateString())
+                ->where('type','Message')->where('company',$key)->sum('totalRecord');
+            }
+            if($key==="Fission Monster"){
+                $fm_monthly_email=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+                ->where('type','Email')->where('company',$key)->sum('totalRecord');
+                $fm_weekly_email=DataLog::where('date', '>=', Carbon::now()->subDays(7))
+                ->where('type','Email')->where('company',$key)->sum('totalRecord');
+                $fm_daily_email=DataLog::whereDate('created_at', '=', Carbon::now()->toDateString())
+                ->where('type','Email')->where('company',$key)->sum('totalRecord');
+
+                $fm_monthly_sms=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+                ->where('type','Message')->where('company',$key)->sum('totalRecord');
+                $fm_weekly_sms=DataLog::where('date', '>=', Carbon::now()->subDays(7))
+                ->where('type','Message')->where('company',$key)->sum('totalRecord');
+                $fm_daily_sms=DataLog::whereDate('created_at', '=', Carbon::now()->toDateString())
+                ->where('type','Message')->where('company',$key)->sum('totalRecord');
+            }
+            if($key==="Dental Services"){
+                $dental_services_monthly_email=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+                ->where('type','Email')->where('company',$key)->sum('totalRecord');
+                $dental_services_weekly_email=DataLog::where('date', '>=', Carbon::now()->subDays(7))
+                ->where('type','Email')->where('company',$key)->sum('totalRecord');
+                $dental_services_daily_email=DataLog::whereDate('created_at', '=', Carbon::now()->toDateString())
+                ->where('type','Email')->where('company',$key)->sum('totalRecord');
+
+                $dental_services_monthly_sms=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+                ->where('type','Message')->where('company',$key)->sum('totalRecord');
+                $dental_services_weekly_sms=DataLog::where('date', '>=', Carbon::now()->subDays(7))
+                ->where('type','Message')->where('company',$key)->sum('totalRecord');
+                $dental_services_daily_sms=DataLog::whereDate('created_at', '=', Carbon::now()->toDateString())
+                ->where('type','Message')->where('company',$key)->sum('totalRecord');
+            }
+
+        }
+
+        return response()->json([
+            'iadsr_monthly_email'=>$iadsr_monthly_email,
+            'iadsr_weekly_email'=>$iadsr_weekly_email,
+            'iadsr_daily_email'=>$iadsr_daily_email,
+            'iadsr_monthly_sms'=>$iadsr_monthly_sms,
+            'iadsr_weekly_sms'=>$iadsr_weekly_sms,
+            'iadsr_daily_sms'=>$iadsr_daily_sms,
+
+            'fm_monthly_email'=>$fm_monthly_email,
+            'fm_weekly_email'=>$fm_weekly_email,
+            'fm_daily_email'=>$fm_daily_email,
+            'fm_monthly_sms'=>$fm_monthly_sms,
+            'fm_weekly_sms'=>$fm_weekly_sms,
+            'fm_daily_sms'=>$fm_daily_sms,
+
+            'dental_services_monthly_email'=>$dental_services_monthly_email,
+            'dental_services_weekly_email'=>$dental_services_weekly_email,
+            'dental_services_daily_email'=>$dental_services_daily_email,
+            'dental_services_monthly_sms'=>$dental_services_monthly_sms,
+            'dental_services_weekly_sms'=>$dental_services_weekly_sms,
+            'dental_services_daily_sms'=>$dental_services_daily_sms,
+        ]);
+    }
+    public function getWPStatus(){
        $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
         ->where('type','Email')->get()->groupBy('company');
 

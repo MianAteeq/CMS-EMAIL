@@ -27,4 +27,5 @@ Route::get('/get/qr/code', [MessaeController::class, 'getWhatsAppIQrCode']);
 Route::get('/wa/logout', [MessaeController::class, 'waLogout']);
 Route::get('/get/stats', [EmailController::class, 'getStat']);
 Route::get('/get/wa/status', [MessaeController::class, 'getWAStatus']);
+Route::get('/get/wp/status', [MessaeController::class, 'getWPStatus']);
 });
