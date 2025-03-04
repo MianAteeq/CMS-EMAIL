@@ -17,14 +17,17 @@ class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        // $details = [
-        //     'email' => 'ateeqadrees83@gmail.com',
-        //     'title' => 'Subject: Test Email',
-        //     'message' => 'This is a test email from Laravel',
-        //     'company_email' =>env('MAIL_FROM_ADDRESS'),
-        //     'company' => $request['company']??env('MAIL_FROM_NAME'),
-        //     'file_path'=>NULL
-        // ];
+        return  DB::table('jobs')->delete();
+        $details = [
+            'email' => 'ateeqadrees83@gmail.com',
+            'title' => 'Subject: Test Email',
+            'message' => 'This is a test email from Laravel',
+            'company_email' =>env('MAIL_FROM_ADDRESS'),
+            'company' => $request['company']??env('MAIL_FROM_NAME'),
+            'file_path'=>NULL
+        ];
+
+        SendEmailJobFM::dispatch($details);
 
         // Mail::mailer('fm')->send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
         //     $m->to($details['email'])->subject($details['title']);
