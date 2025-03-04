@@ -33,7 +33,7 @@ class EmailController extends Controller
         // return;
 
 
-      return  DB::table('jobs')->count();
+      return  DB::table('jobs')->delete();
     }
     public function sendEmail(Request $request)
     {
