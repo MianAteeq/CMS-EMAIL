@@ -27,11 +27,11 @@ class EmailController extends Controller
             'file_path'=>NULL
         ];
 
-        SendEmailJob::dispatch($details);
+        // SendEmailJob::dispatch($details);
 
-        // Mail::mailer('fm')->send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
-        //     $m->to($details['email'])->subject($details['title']);
-        // });
+        Mail::mailer('iadsr')->send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
+            $m->to($details['email'])->subject($details['title']);
+        });
 
         // return;
 
