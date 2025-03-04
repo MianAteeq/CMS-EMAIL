@@ -102,13 +102,13 @@ class EmailController extends Controller
 
 
         }
-        $data = new stdClass();
-        $data->type = "Email";
-        $data->company = $request['company'];
-        $data->date = Carbon::now();
-        $data->totalRecord = count($emails);
+        // $data = new stdClass();
+        // $data->type = "Email";
+        // $data->company = $request['company'];
+        // $data->date = Carbon::now();
+        // $data->totalRecord = count($emails);
 
-        DataLog::saveLog($data);
+        // DataLog::saveLog($data);
 
 
 
