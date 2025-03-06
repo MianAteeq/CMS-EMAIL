@@ -27,8 +27,8 @@ class MessaeController extends Controller
             ]);
         }
 
-        $phone_numbers=['+923004330812','+923318412731','+923364786425'];
-        // $phone_numbers=json_decode($request['phone_numbers']);
+        // $phone_numbers=['+923004330812','+923318412731','+923364786425'];
+        $phone_numbers=json_decode($request['phone_numbers']);
 
 
 
@@ -74,8 +74,8 @@ class MessaeController extends Controller
             $delay = 0;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
-                    'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
-                    // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
+                    // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
+                    'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
                     'message' => strip_tags($request['message'])
                 ];
 
