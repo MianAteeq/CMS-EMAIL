@@ -18,6 +18,7 @@ class MessaeController extends Controller
 
     public function sendMessage(Request $request)
     {
+        return 1;
 
         if(DB::table('jobs')->count()>0){
             return response()->json([
