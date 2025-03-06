@@ -40,11 +40,11 @@ class EmailController extends Controller
         $messageContent = [
             'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
             // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
-            'message' => strip_tags($request['message'])
+            'message' => 'Hi'
         ];
 
         // Dispatch the job to send the message asynchronously
-        SendChatMessage::dispatch((object)$messageContent)->delay(now()->addSeconds(30));
+        SendChatMessage::dispatch((object)$messageContent)->delay(now()->addSeconds(5));
 
 
       return  DB::table('jobs')->count();
