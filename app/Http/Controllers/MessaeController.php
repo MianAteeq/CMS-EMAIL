@@ -18,7 +18,7 @@ class MessaeController extends Controller
 
     public function sendMessage(Request $request)
     {
-        return 1;
+        // return 1;
 
         if(DB::table('jobs')->count()>0){
             return response()->json([
@@ -74,7 +74,8 @@ class MessaeController extends Controller
             $delay = 0;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
-                    'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
+                    'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
+                    // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
                     'message' => strip_tags($request['message'])
                 ];
 
