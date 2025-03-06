@@ -44,7 +44,7 @@ class EmailController extends Controller
         ];
 
         // Dispatch the job to send the message asynchronously
-        SendChatMessage::dispatch((object)$messageContent)->delay(now()->addSeconds(5));
+        SendChatMessage::dispatch((object)$messageContent);
 
 
       return  DB::table('jobs')->count();
