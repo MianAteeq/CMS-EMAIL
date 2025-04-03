@@ -40,21 +40,22 @@ class MessaeController extends Controller
                 $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64String);
             }
 
-            // Decode the Base64 string
-            $imageData = base64_decode($base64String);
+           // Get the base64 string
+        $base64Image = $request->input('image');
 
-            // Create a unique file name for the image
-            $fileName = 'image_' . Str::random(10) . '.png';
+        // Decode the image
+        $image = base64_decode($base64Image);
 
-            // Store the image in the 'public' disk (you can choose another disk if needed)
-            // $path = Storage::disk('public')->put($fileName, $imageData);
+        // Generate a unique name
+        $imageName = uniqid() . '.png'; // Change extension if needed
 
-            $path = public_path('uploads/' . $fileName); // This will save the file in public/uploads folder
+        // Save to storage/app/public/images
+        Storage::put("public/images/$imageName", $image);
 
-            // Store the decoded image as a file in the public directory
-            file_put_contents($path, $imageData);
+        // // Get the URL or path
+        $imagePath = "storage/images/".$imageName;
 
-         return   $file_path = 'https://cms.fissionmonster.com/uploads/'.$fileName;
+         return   $file_path = asset($imagePath);
             $delay = 0;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
