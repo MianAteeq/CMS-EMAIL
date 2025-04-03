@@ -30,7 +30,7 @@ class EmailController extends Controller
         SendChatMessage::dispatch((object)$messageContent);
 
 
-      return  DB::table('jobs')->delete();
+      return  DB::table('jobs')->count();
     }
     public function sendEmail(Request $request)
     {
