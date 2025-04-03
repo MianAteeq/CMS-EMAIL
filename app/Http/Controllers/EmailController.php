@@ -18,7 +18,6 @@ class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        
         $phone_number='+923004330812';
 
         $messageContent = [
