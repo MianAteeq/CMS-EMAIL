@@ -28,7 +28,7 @@ class MessaeController extends Controller
         }
 
         $phone_numbers=['+923004330812','+923318412731','+923364786425'];
-        $phone_numbers=json_decode($request['phone_numbers']);
+        // $phone_numbers=json_decode($request['phone_numbers']);
 
 
 
