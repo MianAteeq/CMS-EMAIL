@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendChatMessage;
 use App\Jobs\SendEmailJob;
 use App\Jobs\SendEmailJobDental;
 use App\Jobs\SendEmailJobFM;
@@ -18,17 +17,20 @@ class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        
-        $phone_number='+923004330812';
+        // $details = [
+        //     'email' => 'ateeqadrees83@gmail.com',
+        //     'title' => 'Subject: Test Email',
+        //     'message' => 'This is a test email from Laravel',
+        //     'company_email' =>env('MAIL_FROM_ADDRESS'),
+        //     'company' => $request['company']??env('MAIL_FROM_NAME'),
+        //     'file_path'=>NULL
+        // ];
 
-        $messageContent = [
-            'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
-            // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
-            'message' => 'Hi'
-        ];
+        // Mail::mailer('fm')->send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
+        //     $m->to($details['email'])->subject($details['title']);
+        // });
 
-        // Dispatch the job to send the message asynchronously
-        SendChatMessage::dispatch((object)$messageContent);
+        // return;
 
 
       return  DB::table('jobs')->count();
@@ -97,13 +99,13 @@ class EmailController extends Controller
 
 
         }
-        // $data = new stdClass();
-        // $data->type = "Email";
-        // $data->company = $request['company'];
-        // $data->date = Carbon::now();
-        // $data->totalRecord = count($emails);
+        $data = new stdClass();
+        $data->type = "Email";
+        $data->company = $request['company'];
+        $data->date = Carbon::now();
+        $data->totalRecord = count($emails);
 
-        // DataLog::saveLog($data);
+        DataLog::saveLog($data);
 
 
 
@@ -287,80 +289,8 @@ class EmailController extends Controller
         ]);
     }
     public function getWPStatus(){
-       return  $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))->orderBy('date','desc')->get();
-
-
-        $array = [
-           [
-
-                "date"=> "2025-02-10",
-                "totalRecord"=> 50,
-                "type"=> "Message",
-                "company"=> "IADSR",
-
-           ],
-               [
-
-                "date"=> "2025-02-11",
-                "totalRecord"=> 50,
-                "type"=> "Message",
-                "company"=> "IADSR",
-
-               ],
-               [
-
-                "date"=> "2025-02-18",
-                "totalRecord"=> 50,
-                "type"=> "Message",
-                "company"=> "IADSR",
-
-               ],
-               [
-
-                "date"=> "2025-02-20",
-                "totalRecord"=> 50,
-                "type"=> "Message",
-                "company"=> "IADSR",
-
-               ],
-               [
-
-                "date"=> "2025-02-20",
-                "totalRecord"=> 50,
-                "type"=> "Message",
-                "company"=> "IADSR",
-
-               ],
-               [
-
-                "date"=> "2025-02-21",
-                "totalRecord"=> 50,
-                "type"=> "Message",
-                "company"=> "IADSR",
-
-               ],
-               [
-
-                "date"=> "2025-02-24",
-                "totalRecord"=> 50,
-                "type"=> "Message",
-                "company"=> "IADSR",
-
-               ],
-               [
-
-                "date"=> "2025-02-25",
-                "totalRecord"=> 50,
-                "type"=> "Message",
-                "company"=> "IADSR",
-
-                ]
-
-                ];
-
-                DataLog::insert($array);
-
-
+        return $records=DataLog::where('date', '>=', Carbon::now()->subDays(30))
+        ->where('type','Email')->get()->groupBy('company');
 
         $iadsr_monthly_email=0;
         $iadsr_weekly_email=0;
@@ -386,7 +316,7 @@ class EmailController extends Controller
         $dental_services_weekly_sms=0;
         $dental_services_daily_sms=0;
 
-        foreach ($records as $key => $record){
+        foreach ($records as $key => $record) {
 
             if($key==="IADSR"){
                 $iadsr_monthly_email=DataLog::where('date', '>=', Carbon::now()->subDays(30))

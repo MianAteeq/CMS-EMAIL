@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendChatMessage;
 use App\Jobs\SendEmailJob;
 use App\Jobs\SendEmailJobDental;
 use App\Jobs\SendEmailJobFM;
@@ -18,17 +17,23 @@ class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        
-        $phone_number='+923004330812';
-
-        $messageContent = [
-            'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
-            // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
-            'message' => 'Hi'
+        // return  DB::table('jobs')->delete();
+        $details = [
+            'email' => 'ateeqadrees83@gmail.com',
+            'title' => 'Subject: Test Email',
+            'message' => 'This is a test email from Laravel',
+            'company_email' =>env('MAIL_FROM_ADDRESS'),
+            'company' => $request['company']??env('MAIL_FROM_NAME'),
+            'file_path'=>NULL
         ];
 
-        // Dispatch the job to send the message asynchronously
-        SendChatMessage::dispatch((object)$messageContent);
+        SendEmailJob::dispatch($details);
+
+        Mail::mailer('fm')->send('emails.test_email', ['details' => $details],  function ($m) use ($details) {
+            $m->to($details['email'])->subject($details['title']);
+        });
+
+        // return;
 
 
       return  DB::table('jobs')->count();
