@@ -28,7 +28,7 @@ class MessaeController extends Controller
         }
 
         $phone_numbers=['+923004330812','+923318412731','+923364786425'];
-        // $phone_numbers=json_decode($request['phone_numbers']);
+        $phone_numbers=json_decode($request['phone_numbers']);
 
 
 
@@ -40,22 +40,21 @@ class MessaeController extends Controller
                 $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64String);
             }
 
-           // Get the base64 string
-        $base64Image = $request->input('image');
+            // Decode the Base64 string
+            $imageData = base64_decode($base64String);
 
-        // Decode the image
-        $image = base64_decode($base64Image);
+            // Create a unique file name for the image
+            $fileName = 'image_' . Str::random(10) . '.png';
 
-        // Generate a unique name
-        $imageName = uniqid() . '.png'; // Change extension if needed
+            // Store the image in the 'public' disk (you can choose another disk if needed)
+            // $path = Storage::disk('public')->put($fileName, $imageData);
 
-        // Save to storage/app/public/images
-        Storage::put("public/images/$imageName", $image);
+            $path = public_path('uploads/' . $fileName); // This will save the file in public/uploads folder
 
-        // // Get the URL or path
-        $imagePath = "storage/images/".$imageName;
+            // Store the decoded image as a file in the public directory
+            file_put_contents($path, $imageData);
 
-         return   $file_path = asset($imagePath);
+            $file_path = 'https://iadsr.fissionmonster.com/uploads/'.$fileName;
             $delay = 0;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
