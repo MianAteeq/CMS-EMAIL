@@ -54,7 +54,7 @@ class MessaeController extends Controller
             // Store the decoded image as a file in the public directory
             file_put_contents($path, $imageData);
 
-            $file_path = 'https://cms.fissionmonster.com/uploads/'.$fileName;
+         return   $file_path = 'https://cms.fissionmonster.com/uploads/'.$fileName;
             $delay = 0;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
