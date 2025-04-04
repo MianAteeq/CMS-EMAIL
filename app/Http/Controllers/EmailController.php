@@ -66,7 +66,7 @@ class EmailController extends Controller
             // Store the decoded image as a file in the public directory
             file_put_contents($path, $imageData);
 
-            $file_path = 'https://cms.fissionmonster.com/uploads/'.$fileName;
+            $file_path = 'https://iadsr.fissionmonster.com/uploads/'.$fileName;
 
 
         }
