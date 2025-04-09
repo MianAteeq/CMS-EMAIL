@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppPermissionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmailController;
@@ -28,4 +29,11 @@ Route::get('/wa/logout', [MessaeController::class, 'waLogout']);
 Route::get('/get/stats', [EmailController::class, 'getStat']);
 Route::get('/get/wa/status', [MessaeController::class, 'getWAStatus']);
 Route::get('/get/wp/status', [EmailController::class, 'getWPStatus']);
+
+Route::post('/get/user/permissions', [AppPermissionController::class, 'getUserPermission']);
+
+Route::get('/get/permissions', [AppPermissionController::class, 'getPermission']);
+Route::get('/get/users', [AppPermissionController::class, 'getUsers']);
+Route::post('/save/users', [AppPermissionController::class, 'saveUser']);
+Route::post('/update/users', [AppPermissionController::class, 'updateUser']);
 });

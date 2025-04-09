@@ -16,16 +16,21 @@ class PermissionSeeder extends Seeder
     public function run()
     {
 
-        // Permission::where('group_type','APP')->delete();
-        // $quote_permissions=['view quote','add new quote','add job request to the quote','add job item to quote','delete quote',
-        //  'change status of quote','edit job request of quote','delete job request of quote','view job request of quote','edit job item of quote','delete job item of quote',
-        //  'view job item of quote','view contact detail from quote','view vehicle detail from quote','view log of quotes'];
+        // Permission::truncate();
+        $quote_permissions=['dashboard','view_category','add_category','all_category','edit_category',
+                            'view_contact','add_contact','all_contact','patient_contact','delete_contact','edit_contact',
+                            'aesthetics_contact','doctor_mbbs_contact','doctor_bds_contact','nursing_contact',
+                            'generic_contact','send_message_contact',
+                            'view_email','add_email','all_email','patient_email','delete_email','edit_email',
+                            'aesthetics_email','doctor_mbbs_email','doctor_bds_email','nursing_email',
+                            'generic_email','send_message_email','logs','view_users','add_users','all_users','edit_users',
+                            ];
 
 
-        //  foreach ($quote_permissions as $key => $permission) {
+         foreach ($quote_permissions as $key => $permission) {
 
-        //     $role = Permission::create(['name' => $permission,'type'=>'Quote','group_type'=>'APP','guard_name'=>'web']);
-        // }
+            $role = Permission::create(['name' => $permission,'type'=>'APP','group_type'=>'APP','guard_name'=>'web']);
+        }
 
         // $booking_permissions=['view bookings','add new booking','delete booking','change status of booking','add job request to the booking',
         //  'add job item to the booking','edit job request of booking','delete job request of booking','view job request of booking','edit job item of booking','delete job item of booking',
@@ -110,33 +115,7 @@ class PermissionSeeder extends Seeder
         //     $role = Permission::create(['name' => $permission,'type'=>'Invoice','group_type'=>'APP','guard_name'=>'web']);
         // }
 
-        $directories=['Access User','Manage User'];
 
-        foreach ($directories as $key => $directory) {
-
-            $role = Permission::create(['name' => $directory,'type'=>'Directory','group_type'=>'BUSINESS','guard_name'=>'web']);
-        }
-
-        $products=['Business Manager','Service Provider'];
-
-        foreach ($products as $key => $product) {
-
-            $role = Permission::create(['name' => $product,'type'=>'Product','group_type'=>'BUSINESS','guard_name'=>'web']);
-        }
-
-        $reports=['App Report','User Report','Business Report'];
-
-        foreach ($reports as $key => $report) {
-
-            $role = Permission::create(['name' => $report,'type'=>'Reporting','group_type'=>'BUSINESS','guard_name'=>'web']);
-        }
-
-        $billings=['Subscription','Invoice'];
-
-        foreach ($billings as $key => $billing) {
-
-            $role = Permission::create(['name' => $billing,'type'=>'Billing','group_type'=>'BUSINESS','guard_name'=>'web']);
-        }
 
 
     }
