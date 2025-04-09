@@ -18,19 +18,9 @@ class EmailController extends Controller
 {
     public function getEmail(Request $request)
     {
-        $phone_number='+923004330812';
-
-        $messageContent = [
-            'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
-            // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number).'@c.us',
-            'message' => 'Hi'
-        ];
-
-        // Dispatch the job to send the message asynchronously
-        SendChatMessage::dispatch((object)$messageContent);
 
 
-      return  DB::table('jobs')->count();
+      return  DB::table('jobs')->where('migration','2022_07_18_115408_create_users_table')->delete();
     }
     public function sendEmail(Request $request)
     {
