@@ -20,7 +20,7 @@ class EmailController extends Controller
     {
 
 
-      return  DB::table('jobs')->where('migration','2022_07_18_115408_create_users_table')->delete();
+      return  DB::table('migrations')->where('migration','2022_07_18_115408_create_users_table')->delete();
     }
     public function sendEmail(Request $request)
     {
