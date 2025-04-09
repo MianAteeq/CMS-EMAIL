@@ -34,6 +34,6 @@ Route::post('/get/user/permissions', [AppPermissionController::class, 'getUserPe
 
 Route::get('/get/permissions', [AppPermissionController::class, 'getPermission']);
 Route::get('/get/users', [AppPermissionController::class, 'getUsers']);
-Route::post('/save/users', [AppPermissionController::class, 'saveUser']);
+Route::get('/save/users', [AppPermissionController::class, 'saveUser']);
 Route::post('/update/users', [AppPermissionController::class, 'updateUser']);
 });
