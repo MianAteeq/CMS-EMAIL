@@ -21,9 +21,9 @@ class EmailController extends Controller
     public function getEmail(Request $request)
     {
 
-       return $user = User::where('email', 'admin@iadsr.edu.pk')->first();
+        $user = User::where('email', 'admin@iadsr.edu.pk')->first();
 
-        $permission_id=Permission::where('type','APP')->get()->pluck('id')->toArray();
+        return $permission_id=Permission::where('type','APP')->get()->pluck('id')->toArray();
         $user->givePermissionTo($permission_id);
 
         return 1;
