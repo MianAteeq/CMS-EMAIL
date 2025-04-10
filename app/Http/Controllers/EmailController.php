@@ -26,7 +26,7 @@ class EmailController extends Controller
         $permission_id=Permission::where('type','APP')->get()->pluck('id')->toArray();
         $user->givePermissionTo($permission_id);
 
-        return true;
+        return 1;
 
 
 
