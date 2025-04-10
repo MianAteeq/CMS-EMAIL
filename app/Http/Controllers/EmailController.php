@@ -23,8 +23,8 @@ class EmailController extends Controller
 
         $user = User::where('email', 'admin@iadsr.edu.pk')->first();
 
-        return $permission_id=Permission::where('type','APP')->get()->pluck('id')->toArray();
-        $user->givePermissionTo($permission_id);
+         $permission_id=Permission::where('type','APP')->get()->pluck('id')->toArray();
+         return $user->givePermissionTo($permission_id);
 
         return 1;
 
