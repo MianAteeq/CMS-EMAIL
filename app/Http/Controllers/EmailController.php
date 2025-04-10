@@ -7,6 +7,7 @@ use App\Jobs\SendEmailJob;
 use App\Jobs\SendEmailJobDental;
 use App\Jobs\SendEmailJobFM;
 use App\Models\DataLog;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,9 +21,9 @@ class EmailController extends Controller
     public function getEmail(Request $request)
     {
 
-        $user = DB::table('users')->where('email', 'admin@iadsr.edu.pk')->first();
+        $user = User::where('email', 'admin@iadsr.edu.pk')->first();
 
-        $permission_id=Permission::all()->pluck('id')->toArray();
+        $permission_id=Permission::where('type','APP')->get()->pluck('id')->toArray();
         $user->givePermissionTo($permission_id);
 
         return true;
