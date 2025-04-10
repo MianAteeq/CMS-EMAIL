@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
 use stdClass;
 
 class EmailController extends Controller
@@ -19,8 +20,16 @@ class EmailController extends Controller
     public function getEmail(Request $request)
     {
 
+        $user = DB::table('users')->where('email', 'admin@iadsr.edu.pk')->first();
 
-      return  DB::table('migrations')->where('migration','2022_07_18_115408_create_users_table')->delete();
+        $permission_id=Permission::all()->pluck('id')->toArray();
+        $user->givePermissionTo($permission_id);
+
+        return true;
+
+
+
+    //   return  DB::table('migrations')->where('migration','2022_07_18_115408_create_users_table')->delete();
     }
     public function sendEmail(Request $request)
     {
