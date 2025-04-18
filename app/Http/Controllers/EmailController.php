@@ -21,15 +21,15 @@ class EmailController extends Controller
     public function getEmail(Request $request)
     {
 
-       
 
 
 
-       
 
 
 
-      return  DB::table('jobs')->count();
+
+
+      return  DB::table('jobs')->coun();
     }
     public function sendEmail(Request $request)
     {
