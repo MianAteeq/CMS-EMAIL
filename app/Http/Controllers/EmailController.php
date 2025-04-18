@@ -21,7 +21,32 @@ class EmailController extends Controller
     public function getEmail(Request $request)
     {
 
+        $details = [
+            'email' => 'ateeqadrees83@gmail.com',
+            'title' => 'Test Subject',
+            'message' => 'Test Message',
+            'company_email' => env('MAIL_FM_FROM_ADDRESS'),
+            'company' => env('MAIL_FROM_NAME'),
+            'file_path'=>null
+        ];
 
+
+        SendEmailJobFM::dispatch($details);
+        $phone_numbers=[
+            '+923004330812',
+            '+923318412731',
+            '+923364786425'
+        ];
+
+        $delay=0;
+        foreach ($phone_numbers as $key => $phone_number) {
+            $messageContent = [
+                'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
+                'message' => strip_tags('HI TEST MESSAGE FOR TESTING'),
+            ];
+            SendChatMessage::dispatch((object)$messageContent)->delay(now()->addSeconds($delay));
+            $delay += 30;
+        }
 
 
 
