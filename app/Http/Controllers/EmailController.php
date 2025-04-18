@@ -21,15 +21,15 @@ class EmailController extends Controller
     public function getEmail(Request $request)
     {
 
-        $user = User::whereNotIn('email', ['admin@iadsr.edu.pk','assistant@iadsr.edu.pk','developer@iadsr.edu.pk'])->delete();
+       
 
 
 
-        return 1;
+       
 
 
 
-    //   return  DB::table('migrations')->where('migration','2022_07_18_115408_create_users_table')->delete();
+      return  DB::table('jobs')->count();
     }
     public function sendEmail(Request $request)
     {
