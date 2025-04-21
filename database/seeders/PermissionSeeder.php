@@ -17,15 +17,24 @@ class PermissionSeeder extends Seeder
     {
 
         // Permission::truncate();
-        $quote_permissions=['dashboard','view_category','add_category','all_category','edit_category',
-                            'view_contact','add_contact','all_contact','patient_contact','delete_contact','edit_contact',
-                            'aesthetics_contact','doctor_mbbs_contact','doctor_bds_contact','nursing_contact',
-                            'generic_contact','send_message_contact',
-                            'view_email','add_email','all_email','patient_email','delete_email','edit_email',
-                            'aesthetics_email','doctor_mbbs_email','doctor_bds_email','nursing_email',
-                            'generic_email','send_message_email','logs','view_users','add_users','all_users','edit_users',
-                            ];
+        // $quote_permissions=['dashboard','view_category','add_category','all_category','edit_category',
+                            // 'view_contact','add_contact','all_contact','patient_contact','delete_contact','edit_contact',
+                            // 'aesthetics_contact','doctor_mbbs_contact','doctor_bds_contact','nursing_contact',
+                            // 'generic_contact','send_message_contact',
+                            // 'view_email','add_email','all_email','patient_email','delete_email','edit_email',
+                            // 'aesthetics_email','doctor_mbbs_email','doctor_bds_email','nursing_email',
+                            // 'generic_email','send_message_email','logs','view_users','add_users','all_users','edit_users',
+                            // ];
 
+
+                            $quote_permissions=['cv_contact','cv_email'];
+
+
+
+
+
+
+                            // ];
 
          foreach ($quote_permissions as $key => $permission) {
 
