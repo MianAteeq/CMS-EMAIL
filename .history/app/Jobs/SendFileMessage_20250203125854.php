@@ -40,7 +40,7 @@ class SendFileMessage implements ShouldQueue
         $message = $this->messageContent->message;
         $file = $this->messageContent->file;
 
-        $response = $client->request('POST', 'https://waapi.app/api/v1/instances/41430/client/action/send-media', [
+        $response = $client->request('POST', 'https://waapi.app/api/v1/instances/68034/client/action/send-media', [
             'body' => json_encode([
                 'chatId' => $chatId,
                 "message"=>$message,

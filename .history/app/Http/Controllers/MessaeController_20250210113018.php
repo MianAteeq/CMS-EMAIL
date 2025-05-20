@@ -98,7 +98,7 @@ class MessaeController extends Controller
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET', 'https://waapi.app/api/v1/instances/41430/client/me', [
+        $response = $client->request('GET', 'https://waapi.app/api/v1/instances/68034/client/me', [
             'headers' => [
                 'accept' => 'application/json',
                 'authorization' => 'Bearer 2inDWNmmmYs6DqGqFjCyW9ZsaI4VCgDGRQaV1cvT38edb5cc',
@@ -119,7 +119,7 @@ class MessaeController extends Controller
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET', 'https://waapi.app/api/v1/instances/41430/client/qr', [
+        $response = $client->request('GET', 'https://waapi.app/api/v1/instances/68034/client/qr', [
             'headers' => [
                 'accept' => 'application/json',
                 'authorization' => 'Bearer 2inDWNmmmYs6DqGqFjCyW9ZsaI4VCgDGRQaV1cvT38edb5cc',
@@ -146,7 +146,7 @@ class MessaeController extends Controller
     {
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST', 'https://waapi.app/api/v1/instances/41430/client/action/logout', [
+        $response = $client->request('POST', 'https://waapi.app/api/v1/instances/68034/client/action/logout', [
           'headers' => [
             'accept' => 'application/json',
             'authorization' => 'Bearer 2inDWNmmmYs6DqGqFjCyW9ZsaI4VCgDGRQaV1cvT38edb5cc',
@@ -173,7 +173,7 @@ class MessaeController extends Controller
     public function getWAStatus(){
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET', 'https://waapi.app/api/v1/instances/41430/client/me', [
+        $response = $client->request('GET', 'https://waapi.app/api/v1/instances/68034/client/me', [
           'headers' => [
             'accept' => 'application/json',
             'authorization' => 'Bearer 2inDWNmmmYs6DqGqFjCyW9ZsaI4VCgDGRQaV1cvT38edb5cc',

@@ -40,7 +40,7 @@ class SendChatMessage implements ShouldQueue
         $recipient = '1234567890'; // Replace with dynamic value
         $message = $this->messageContent->message;
 
-        $response = $client->request('POST', 'https://waapi.app/api/v1/instances/41430/client/action/send-media', [
+        $response = $client->request('POST', 'https://waapi.app/api/v1/instances/68034/client/action/send-media', [
             'body' => json_encode([
                 'chatId' => $chatId,
                 "mediaUrl"=>"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQln3joiHOTfprbh5wZ_Bmr-RG03kdK1ineTg&s"

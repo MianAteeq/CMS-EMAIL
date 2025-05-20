@@ -35,7 +35,7 @@ class SendChatMessage implements ShouldQueue
     public function handle()
     {
         $client = new \GuzzleHttp\Client();
-        $client->request('POST', 'https://waapi.app/api/v1/instances/41430/client/action/send-message', [
+        $client->request('POST', 'https://waapi.app/api/v1/instances/68034/client/action/send-message', [
             'body' => '{"chatId":'.$this->messageContent->phone_no.',"message":"Hello @1234567890, how are you?"}',
             'headers' => [
             'accept' => 'application/json',
