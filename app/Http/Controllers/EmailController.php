@@ -32,6 +32,10 @@ class EmailController extends Controller
 
 
         SendEmailJob::dispatch($details);
+
+        Mail::mailer('iadsr')->raw('Test email from Laravel', function ($msg) {
+    $msg->to('youremail@example.com')->subject('Test');
+});
         // $phone_numbers=[
         //     '+923004330812',
         //     '+923318412731',
