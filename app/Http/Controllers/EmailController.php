@@ -6,7 +6,6 @@ use App\Jobs\SendChatMessage;
 use App\Jobs\SendEmailJob;
 use App\Jobs\SendEmailJobDental;
 use App\Jobs\SendEmailJobFM;
-use App\Mail\SendEmailDental;
 use App\Models\DataLog;
 use App\Models\User;
 use Carbon\Carbon;
@@ -31,12 +30,8 @@ class EmailController extends Controller
             'file_path'=>null
         ];
 
-        Mail::mailer('iadsr')->raw('This is the plain text email body.', function ($message) {
-    $message->to('ateeqadrees83@gmail.com')
-            ->subject('Simple Email');
-});
 
-        // SendEmailJobFM::dispatch($details);
+        SendEmailJob::dispatch($details);
         // $phone_numbers=[
         //     '+923004330812',
         //     '+923318412731',
