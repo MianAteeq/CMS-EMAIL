@@ -31,7 +31,10 @@ class EmailController extends Controller
             'file_path'=>null
         ];
 
-         Mail::mailer('fm')->to($details['email'])->send(new SendEmailDental($details));
+        Mail::mailer('fm')->raw('This is the plain text email body.', function ($message) {
+    $message->to('ateeqadrees83@gmail.com')
+            ->subject('Simple Email');
+});
 
         // SendEmailJobFM::dispatch($details);
         // $phone_numbers=[
