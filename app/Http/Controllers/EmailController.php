@@ -6,6 +6,7 @@ use App\Jobs\SendChatMessage;
 use App\Jobs\SendEmailJob;
 use App\Jobs\SendEmailJobDental;
 use App\Jobs\SendEmailJobFM;
+use App\Mail\SendEmailDental;
 use App\Models\DataLog;
 use App\Models\User;
 use Carbon\Carbon;
@@ -30,8 +31,9 @@ class EmailController extends Controller
             'file_path'=>null
         ];
 
+         Mail::mailer('fm')->to($details['email'])->send(new SendEmailDental($details));
 
-        SendEmailJobFM::dispatch($details);
+        // SendEmailJobFM::dispatch($details);
         // $phone_numbers=[
         //     '+923004330812',
         //     '+923318412731',
