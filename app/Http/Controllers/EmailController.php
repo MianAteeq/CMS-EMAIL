@@ -31,10 +31,10 @@ class EmailController extends Controller
             'file_path'=>null
         ];
 
-//         Mail::mailer('iadsr')->raw('This is the plain text email body.', function ($message) {
-//     $message->to('ateeqadrees83@gmail.com')
-//             ->subject('Simple Email');
-// });
+        Mail::mailer('iadsr')->raw('This is the plain text email body.', function ($message) {
+    $message->to('ateeqadrees83@gmail.com')
+            ->subject('Simple Email');
+});
 
         // SendEmailJobFM::dispatch($details);
         // $phone_numbers=[
