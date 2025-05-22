@@ -31,7 +31,7 @@ class EmailController extends Controller
             'file_path'=>null
         ];
 
-        Mail::mailer('fm')->raw('This is the plain text email body.', function ($message) {
+        Mail::mailer('iadsr')->raw('This is the plain text email body.', function ($message) {
     $message->to('ateeqadrees83@gmail.com')
             ->subject('Simple Email');
 });
