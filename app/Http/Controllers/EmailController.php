@@ -25,7 +25,7 @@ class EmailController extends Controller
             'email' => 'ateeqadrees83@gmail.com',
             'title' => 'Test Subject',
             'message' => 'Test Message',
-            'company_email' => env('MAIL_FM_FROM_ADDRESS'),
+            'company_email' => env('MAIL_IADSR_FROM_ADDRESS'),
             'company' => env('MAIL_FROM_NAME'),
             'file_path'=>null
         ];
