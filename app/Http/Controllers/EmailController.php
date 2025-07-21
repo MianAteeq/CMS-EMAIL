@@ -36,21 +36,21 @@ class EmailController extends Controller
 //         Mail::mailer('iadsr')->raw('Test email from Laravel', function ($msg) {
 //     $msg->to('ateeqadrees83@gmail.com')->subject('Test');
 // });
-        // $phone_numbers=[
-        //     '+923004330812',
-        //     '+923318412731',
-        //     '+923364786425'
-        // ];
+        $phone_numbers=[
+            '+923004330812',
+            '+923318412731',
+            '+923364786425'
+        ];
 
-        // $delay=0;
-        // foreach ($phone_numbers as $key => $phone_number) {
-        //     $messageContent = [
-        //         'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
-        //         'message' => strip_tags('HI TEST MESSAGE FOR TESTING'),
-        //     ];
-        //     SendChatMessage::dispatch((object)$messageContent)->delay(now()->addSeconds($delay));
-        //     $delay += 30;
-        // }
+        $delay=0;
+        foreach ($phone_numbers as $key => $phone_number) {
+            $messageContent = [
+                'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number).'@c.us',
+                'message' => strip_tags('HI TEST MESSAGE FOR TESTING'),
+            ];
+            SendChatMessage::dispatch((object)$messageContent)->delay(now()->addSeconds($delay));
+            $delay += 30;
+        }
 
 
 
