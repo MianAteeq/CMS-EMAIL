@@ -218,16 +218,10 @@ Route::get('/greeting', function () {
 
 });
 Route::get('/tests', function () {
-    $hub_setting=TradingUnitHubProfile::where('trading_id',31)->first();
 
-    TradingUnitHubProfile::find($hub_setting['id'])->update([
+    $user=User::where('vender_id','0939295e-00a1-70de-3b38-4c004b6e4344')->first();
 
-        'trading_id'=>31,
-        'is_marketplace'=>1,
-        'is_quote'=>1,
-        'is_booking'=>1,
-
-    ]);
+      $user->givePermissionTo(Permission::pluck('id'));
 });
 Route::get('/create-checkout-session', function () {
 
