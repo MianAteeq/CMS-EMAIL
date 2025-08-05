@@ -219,9 +219,11 @@ Route::get('/greeting', function () {
 });
 Route::get('/tests', function () {
 
-    $user=User::where('vender_id','0939295e-00a1-70de-3b38-4c004b6e4344')->first();
+    $user = User::where('vender_id', '0939295e-00a1-70de-3b38-4c004b6e4344')->first();
 
-      $user->givePermissionTo(Permission::pluck('id'));
+if ($user) {
+    $user->givePermissionTo(Permission::pluck('name')->toArray());
+}
 });
 Route::get('/create-checkout-session', function () {
 
