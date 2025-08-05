@@ -29,6 +29,8 @@ Route::get('/wa/logout', [MessaeController::class, 'waLogout']);
 Route::get('/get/stats', [EmailController::class, 'getStat']);
 Route::get('/get/wa/status', [MessaeController::class, 'getWAStatus']);
 Route::get('/send/text/message', [MessaeController::class, 'sendTextMessage']);
+Route::get('/get/all/group', [MessaeController::class, 'getAllGroup']);
+Route::get('/send/group/message', [MessaeController::class, 'sendGroupMessage']);
 Route::get('/get/wp/status', [EmailController::class, 'getWPStatus']);
 
 Route::post('/get/user/permissions', [AppPermissionController::class, 'getUserPermission']);

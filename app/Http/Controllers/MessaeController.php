@@ -28,8 +28,8 @@ class MessaeController extends Controller
             ]);
         }
 
-        $phone_numbers=['+923004330812','+923318412731','+923364786425'];
-        // $phone_numbers = json_decode($request['phone_numbers']);
+        // $phone_numbers=['+923004330812','+923318412731','+923364786425'];
+        $phone_numbers = json_decode($request['phone_numbers']);
 
 
 
@@ -59,7 +59,7 @@ class MessaeController extends Controller
             $delay = 0;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
-                    'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number),
+                    'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number),
                     'message' => strip_tags($request['message']),
                     'file' => $file_path,
 
@@ -75,8 +75,8 @@ class MessaeController extends Controller
             $delay = 0;
             foreach ($phone_numbers as $key => $phone_number) {
                 $messageContent = [
-                    'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number),
-                    // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number) . '@c.us',
+                    // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number),
+                    'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number->phone_number),
                     'message' => strip_tags($request['message'])
                 ];
 
@@ -483,4 +483,57 @@ class MessaeController extends Controller
             }
         }
     }
+    public function getAllGroup()
+    {
+
+
+     $client = new Client();
+$apiKey =env('WA_KEY');
+$url = 'https://www.wasenderapi.com/api/groups';
+
+try {
+    $response = $client->get($url, [
+        'headers' => [
+            'Authorization' => 'Bearer ' . $apiKey,
+            'Accept' => 'application/json',
+        ]
+    ]);
+
+    return json_decode($response->getBody(),true);
+} catch (\GuzzleHttp\Exception\RequestException $e) {
+    echo "Request failed: " . $e->getMessage();
+    if ($e->hasResponse()) {
+        echo "\nResponse: " . $e->getResponse()->getBody();
+    }
+    }
+}
+    public function sendGroupMessage()
+    {
+
+
+    $client = new Client();
+$apiKey =env('WA_KEY');
+$url = 'https://www.wasenderapi.com/api/send-message';
+
+try {
+    $response = $client->post($url, [
+        'headers' => [
+            'Authorization' => 'Bearer ' . $apiKey,
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'json' =>             [
+            'to' => '120363404160773827@g.us',
+            'text' => 'Ateeq In OFFICE',
+            ]
+    ]);
+
+    echo $response->getBody();
+} catch (\GuzzleHttp\Exception\RequestException $e) {
+    echo "Request failed: " . $e->getMessage();
+    if ($e->hasResponse()) {
+        echo "\nResponse: " . $e->getResponse()->getBody();
+    }
+}
+}
 }
