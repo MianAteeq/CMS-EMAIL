@@ -34,25 +34,40 @@ class SendFileMessage implements ShouldQueue
      */
     public function handle()
     {
+        $file = $this->messageContent->file;
         $client = new \GuzzleHttp\Client();
-        $chatId = $this->messageContent->phone_no; // Replace with dynamic value
+           $chatId = $this->messageContent->phone_no; // Replace with dynamic value
         $recipient = '1234567890'; // Replace with dynamic value
         $message = $this->messageContent->message;
-        $file = $this->messageContent->file;
+        $apiKey =env('WA_KEY');
+        $url = 'https://www.wasenderapi.com/api/send-message';
 
-        $response = $client->request('POST', 'https://waapi.app/api/v1/instances/68034/client/action/send-media', [
-            'body' => json_encode([
-                'chatId' => $chatId,
-                "message"=>$message,
-                "mediaUrl"=>$file,
-                "mediaCaption"=>$message
-            ]),
-            'headers' => [
-                'accept' => 'application/json',
-                'authorization' => 'Bearer 2inDWNmmmYs6DqGqFjCyW9ZsaI4VCgDGRQaV1cvT38edb5cc',
-                'content-type' => 'application/json',
-            ],
-        ]);
+        try {
+            $response = $client->post($url, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $apiKey,
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ],
+                'json' => [
+                    'to' => $chatId,
+                    'text' => $message,
+                    'imageUrl'=>$file
+                ]
+            ]);
+
+            echo $response->getBody();
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            echo "Request failed: " . $e->getMessage();
+            if ($e->hasResponse()) {
+                echo "\nResponse: " . $e->getResponse()->getBody();
+            }
+        }
+
+          Log::info('info to log');
+        
+
+        
 
         //   Log::info('info to log');
     }

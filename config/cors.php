@@ -18,6 +18,7 @@ return [
     'paths' => ['api/*', 'sanctum/csrf-cookie', 'api'],
     'allowed_methods' => ['*'],
     'allowed_origins' => ['https://main.d1pezhudgaxkse.amplifyapp.com'],
+    // 'allowed_origins' => ['http://localhost:3000'],
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
