@@ -21,7 +21,7 @@ class EmailController extends Controller
     public function getEmail(Request $request)
     {
 
-        return  DB::table('jobs')->delete();
+        // return  DB::table('jobs')->delete();
 
         $details = [
             'email' => 'ateeqadrees83@gmail.com',
