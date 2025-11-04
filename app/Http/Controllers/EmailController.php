@@ -143,80 +143,83 @@ class EmailController extends Controller
         ]);
     }
 
-      public function sendtoEmail(Request $request)
-    {
-        return $request;
-      
-        $emails=[$request['emails']]
-        // $emails=['ateeqadrees83@gmail.com'];
-        $file_path=null;
-        if ($request->file !== null) {
-            $base64String = $request->file; // Assume the field name is 'image'
+     use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use stdClass;
+use App\Jobs\SendEmailJob;
+use App\Jobs\SendEmailJobFM;
+use App\Jobs\SendEmailJobDental;
 
-            // Remove the part before the base64 data (if it exists, like "data:image/png;base64,")
-            if (strpos($base64String, 'data:image') === 0) {
-                $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64String);
-            }
+public function sendToEmail(Request $request)
+{
+    // ✅ Validate incoming request
+    $request->validate([
+        'emails' => 'required|array|min:1',
+        'subject' => 'required|string',
+        'message' => 'required|string',
+    ]);
 
-            // Decode the Base64 string
-            $imageData = base64_decode($base64String);
+    // ✅ Optional: handle Base64 image file
+    $file_path = null;
+    if (!empty($request->file)) {
+        $base64String = $request->file;
 
-            // Create a unique file name for the image
-            $fileName = 'image_' . Str::random(10) . '.png';
-
-            // Store the image in the 'public' disk (you can choose another disk if needed)
-            // $path = Storage::disk('public')->put($fileName, $imageData);
-
-            $path = public_path('uploads/' . $fileName); // This will save the file in public/uploads folder
-
-            // Store the decoded image as a file in the public directory
-            file_put_contents($path, $imageData);
-
-            $file_path = 'https://iadsr.fissionmonster.com/uploads/'.$fileName;
-
-
+        // Remove metadata like "data:image/png;base64,"
+        if (strpos($base64String, 'data:image') === 0) {
+            $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64String);
         }
-        $delay = 0;
 
-        foreach($emails as $email){
-            $details = [
+        // Decode and save the file
+        $imageData = base64_decode($base64String);
+        $fileName = 'image_' . Str::random(10) . '.png';
+        $path = public_path('uploads/' . $fileName);
+        file_put_contents($path, $imageData);
+
+        $file_path = url('uploads/' . $fileName);
+    }
+
+    // ✅ Send to multiple emails
+    $emails = $request->emails;
+    $delay = 0;
+
+    foreach ($emails as $email) {
+        $details = [
             'email' => $email,
-            'title' => $request['subject'],
-            'message' => $request['message'],
-            'company_email' => $request['company_email']??env('MAIL_FM_FROM_ADDRESS'),
-            'company' => $request['company']??env('MAIL_FROM_NAME'),
-            'file_path'=>$file_path
+            'title' => $request->subject,
+            'message' => $request->message,
+            'company_email' => $request->company_email ?? env('MAIL_FM_FROM_ADDRESS'),
+            'company' => $request->company ?? env('MAIL_FROM_NAME'),
+            'file_path' => $file_path
         ];
 
-        if($request['company']==="Fission Monster"){
-
-            SendEmailJobFM::dispatch($details);
-        }elseif($request['company']==="IADSR"){
-
-            SendEmailJob::dispatch($details);
-        }else{
-            SendEmailJobDental::dispatch($details);
+        if ($request->company === "Fission Monster") {
+            SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
+        } elseif ($request->company === "IADSR") {
+            SendEmailJob::dispatch($details)->delay(now()->addSeconds($delay));
+        } else {
+            SendEmailJobDental::dispatch($details)->delay(now()->addSeconds($delay));
         }
 
-        $delay += 10;
-
-
-        }
-        // $data = new stdClass();
-        // $data->type = "Email";
-        // $data->company = $request['company'];
-        // $data->date = Carbon::now();
-        // $data->totalRecord = count($emails);
-
-        // DataLog::saveLog($data);
-
-
-
-        return response()->json([
-            'message' => 'Email sent successfully!',
-            'status' => true
-        ]);
+        $delay += 10; // 10 sec delay per email
     }
+
+    // ✅ Optional: Save to log
+    // $data = new stdClass();
+    // $data->type = "Email";
+    // $data->company = $request->company;
+    // $data->date = Carbon::now();
+    // $data->totalRecord = count($emails);
+    // DataLog::saveLog($data);
+
+    return response()->json([
+        'message' => 'Emails queued successfully!',
+        'status' => true,
+        'count' => count($emails)
+    ]);
+}
+
 
     public function getEmailTwo(Request $request)
     {
