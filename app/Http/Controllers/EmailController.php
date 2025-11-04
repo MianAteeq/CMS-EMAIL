@@ -145,6 +145,7 @@ class EmailController extends Controller
 
       public function sendtoEmail(Request $request)
     {
+        return $request;
       
         $emails=[$request['emails']]
         // $emails=['ateeqadrees83@gmail.com'];
