@@ -143,6 +143,80 @@ class EmailController extends Controller
         ]);
     }
 
+      public function sendtoEmail(Request $request)
+    {
+      
+        $emails=[$request['emails']]
+        // $emails=['ateeqadrees83@gmail.com'];
+        $file_path=null;
+        if ($request->file !== null) {
+            $base64String = $request->file; // Assume the field name is 'image'
+
+            // Remove the part before the base64 data (if it exists, like "data:image/png;base64,")
+            if (strpos($base64String, 'data:image') === 0) {
+                $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64String);
+            }
+
+            // Decode the Base64 string
+            $imageData = base64_decode($base64String);
+
+            // Create a unique file name for the image
+            $fileName = 'image_' . Str::random(10) . '.png';
+
+            // Store the image in the 'public' disk (you can choose another disk if needed)
+            // $path = Storage::disk('public')->put($fileName, $imageData);
+
+            $path = public_path('uploads/' . $fileName); // This will save the file in public/uploads folder
+
+            // Store the decoded image as a file in the public directory
+            file_put_contents($path, $imageData);
+
+            $file_path = 'https://iadsr.fissionmonster.com/uploads/'.$fileName;
+
+
+        }
+        $delay = 0;
+
+        foreach($emails as $email){
+            $details = [
+            'email' => $email,
+            'title' => $request['subject'],
+            'message' => $request['message'],
+            'company_email' => $request['company_email']??env('MAIL_FM_FROM_ADDRESS'),
+            'company' => $request['company']??env('MAIL_FROM_NAME'),
+            'file_path'=>$file_path
+        ];
+
+        if($request['company']==="Fission Monster"){
+
+            SendEmailJobFM::dispatch($details);
+        }elseif($request['company']==="IADSR"){
+
+            SendEmailJob::dispatch($details);
+        }else{
+            SendEmailJobDental::dispatch($details);
+        }
+
+        $delay += 10;
+
+
+        }
+        // $data = new stdClass();
+        // $data->type = "Email";
+        // $data->company = $request['company'];
+        // $data->date = Carbon::now();
+        // $data->totalRecord = count($emails);
+
+        // DataLog::saveLog($data);
+
+
+
+        return response()->json([
+            'message' => 'Email sent successfully!',
+            'status' => true
+        ]);
+    }
+
     public function getEmailTwo(Request $request)
     {
         // $emails=['ateeqadrees83@gmail.com','ateeq.adrees86@gmail.com','cricnewstoday95@gmail.com'];
