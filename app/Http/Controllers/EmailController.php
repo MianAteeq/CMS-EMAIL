@@ -154,23 +154,23 @@ public function sendToEmail(Request $request)
     ]);
 
     // ✅ Optional: handle Base64 image file
-    $file_path = null;
-    if (!empty($request->file)) {
-        $base64String = $request->file;
+    $file_path = "https://iadsr.fissionmonster.com/uploads/image_132FjvDsNn.png";
+    // if (!empty($request->file)) {
+    //     $base64String = $request->file;
 
-        // Remove metadata like "data:image/png;base64,"
-        if (strpos($base64String, 'data:image') === 0) {
-            $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64String);
-        }
+    //     // Remove metadata like "data:image/png;base64,"
+    //     if (strpos($base64String, 'data:image') === 0) {
+    //         $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64String);
+    //     }
 
-        // Decode and save the file
-        $imageData = base64_decode($base64String);
-        $fileName = 'image_' . Str::random(10) . '.png';
-        $path = public_path('uploads/' . $fileName);
-        file_put_contents($path, $imageData);
+    //     // Decode and save the file
+    //     $imageData = base64_decode($base64String);
+    //     $fileName = 'image_' . Str::random(10) . '.png';
+    //     $path = public_path('uploads/' . $fileName);
+    //     file_put_contents($path, $imageData);
 
-        $file_path = url('uploads/' . $fileName);
-    }
+    //     $file_path = url('uploads/' . $fileName);
+    // }
 
     // ✅ Send to multiple emails
     $emails = $request->emails;
