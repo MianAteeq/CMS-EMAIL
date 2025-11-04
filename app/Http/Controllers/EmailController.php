@@ -143,15 +143,7 @@ class EmailController extends Controller
         ]);
     }
 
-     use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-use stdClass;
-use App\Jobs\SendEmailJob;
-use App\Jobs\SendEmailJobFM;
-use App\Jobs\SendEmailJobDental;
-
+   
 public function sendToEmail(Request $request)
 {
     // ✅ Validate incoming request
