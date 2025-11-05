@@ -186,13 +186,7 @@ public function sendToEmail(Request $request)
             'file_path' => $file_path
         ];
 
-        if ($request->company === "Fission Monster") {
-            SendEmailJobFM::dispatch($details)->delay(now()->addSeconds($delay));
-        } elseif ($request->company === "IADSR") {
-            SendEmailJob::dispatch($details)->delay(now()->addSeconds($delay));
-        } else {
-            SendEmailJobDental::dispatch($details)->delay(now()->addSeconds($delay));
-        }
+       SendEmailJob::dispatch($details)->delay(now()->addSeconds($delay));
 
         $delay += 10; // 10 sec delay per email
     }
