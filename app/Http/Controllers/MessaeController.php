@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendChatMessage;
+use App\Jobs\SendChatFMMessage;
 use App\Jobs\SendFileMessage;
 use App\Models\DataLog;
 use Carbon\Carbon;
@@ -101,6 +102,36 @@ class MessaeController extends Controller
             'status' => true
         ]);
     }
+
+     public function sendFMMessage(Request $request)
+    {
+       
+
+        // $phone_numbers=['+923004330812','+923318412731','+923364786425'];
+        $phone_numbers = json_decode($request['phone_numbers']);
+
+         $delay = 0;
+            foreach ($phone_numbers as $key => $phone_number) {
+                $messageContent = [
+                    // 'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number),
+                    'phone_no' => preg_replace('/[^\p{L}\p{N}\s]/u', '', $phone_number),
+                    'message' => strip_tags($request['message'])
+                ];
+
+                // Dispatch the job to send the message asynchronously
+                SendChatFMMessage::dispatch((object)$messageContent)->delay(now()->addSeconds($delay));
+                $delay += 30;
+            }
+
+
+
+        return response()->json([
+            'message' => 'Message sent successfully!',
+            'status' => true
+        ]);
+    }
+
+    
 
     public function sessionDetail()
     {
