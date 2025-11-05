@@ -24,6 +24,7 @@ Route::group(['middleware' => ['cors']], function () {
 Route::post('/send', [EmailController::class,'sendEmail']);
 Route::post('/send/email', [EmailController::class,'sendtoEmail']);
 Route::post('/send/message', [MessaeController::class, 'sendMessage']);
+Route::post('/send/message/fm', [MessaeController::class, 'sendFMMessage']);
 Route::get('/get/instance', [MessaeController::class, 'getWhatsAppInfo']);
 Route::get('/get/qr/code', [MessaeController::class, 'getWhatsAppIQrCode']);
 Route::get('/wa/logout', [MessaeController::class, 'waLogout']);
