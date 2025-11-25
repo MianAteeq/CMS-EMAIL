@@ -66,7 +66,7 @@ class MessaeController extends Controller
 
                 ];
                 SendFileMessage::dispatch((object)$messageContent)->delay(now()->addSeconds($delay));
-                $delay += 20;
+                $delay += 30;
             }
 
 
